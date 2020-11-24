@@ -1,17 +1,17 @@
+var log = require('debug')('DEBUG');
 let debug = require('debug');
-const log = require('debug')('log');
-const error = require('debug')('error');
 
-log('Hello');
+if (process.env.NODE_ENV === 'production') {
+    // Disable output for all namespaces
+    console.log('App in production mode, debug logging disabled...');
+    debug.disable();
+} else {
+    // Change output stream to web browser console
+    debug.log = console.info.bind(console);
+    // Enable namespaces
+    console.log('App in development mode, debug logging enabled...');
+    // console.log(debug.enabled('log'));
+    debug.enable('DEBUG');
+}
 
-// if (process.env.NODE_ENV === 'production') {
-//     console.log('App in production mode, debug logging disabled...');
-//     debug.disable();
-// } else {
-//     console.log('App in development mode, debug logging enabled...');
-//     debug.enable('log');
-//     debug.enable('error');
-//     log('Hello');
-// }
-
-export default log;
+export { log };
