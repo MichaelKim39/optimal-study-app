@@ -9,14 +9,14 @@ import { log } from '../../utils/logger';
 
 import DefaultLayout from '../../components/layouts/DefaultLayout';
 
-const Subjects = ({ subjects }) => {
-    const renderSubjects = () => {
-        return subjects.map((subject) => (
+const Topics = ({ topics }) => {
+    const renderTopics = () => {
+        return topics.map((subject) => (
             <li className={styles.subjectTitle} key={subject.id}>
                 {/* <Link as={`/subject/${subject.id}`} href={'subject/[subjectId]'}>
                     <a>{subject.title}</a>
                 </Link> */}
-                <Link route={`/subjects/${subject.id}`}>
+                <Link route={`/topics/${subject.id}`}>
                     <a>{subject.title}</a>
                 </Link>
             </li>
@@ -25,23 +25,23 @@ const Subjects = ({ subjects }) => {
 
     return (
         <DefaultLayout>
-            <h1>I am Subjects page</h1>
-            <ul>{renderSubjects()}</ul>
+            <h1>I am Topics page</h1>
+            <ul>{renderTopics()}</ul>
         </DefaultLayout>
     );
 };
 
-Subjects.getInitialProps = async () => {
-    let subjects = [];
+Topics.getInitialProps = async () => {
+    let topics = [];
     try {
         const response = await axios.get(
             'https://jsonplaceholder.typicode.com/posts',
         );
-        subjects = response.data;
+        topics = response.data;
     } catch (error) {
         log(error);
     }
-    return { subjects: subjects.slice(0, 10) };
+    return { topics: topics.slice(0, 10) };
 };
 
-export default Subjects;
+export default topics;

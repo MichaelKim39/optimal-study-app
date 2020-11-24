@@ -14,8 +14,8 @@ const Topic = ({ topic }) => {
     return (
         <DefaultLayout>
             <h1>{topic.title}</h1>
-            <p>{topic.body}</p>
-            <p>{topic.id}</p>
+            <p>Topic Description: {topic.body}</p>
+            <p>Topic ID: {topic.id}</p>
         </DefaultLayout>
     );
 };
@@ -24,12 +24,12 @@ Topic.getInitialProps = async ({ query }) => {
     let topic = [];
     try {
         const response = await axios.get(
-            `https://jsonplaceholder.typicode.com/posts/${query}`,
+            `https://jsonplaceholder.typicode.com/posts/${query.topicId}`,
         );
         topic = response.data;
-        log('Response', topic);
+        log('Response', response.data);
     } catch (error) {
-        log(error);
+        log('Error', error.response);
     }
     return { topic };
 };

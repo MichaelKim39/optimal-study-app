@@ -6,12 +6,11 @@ import styles from './Header.module.css';
 const Header = () => {
     return (
         <>
-            <p className='blueColor'>Hello</p>
             <Link href='/home'>
-                <a className={styles.navButton}> Home </a>
+                <a> Home </a>
             </Link>
             <Link href='/subjects'>
-                <a className={styles.navButton}> Subjects </a>
+                <a> Subjects </a>
             </Link>
         </>
     );
