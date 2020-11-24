@@ -1,17 +1,21 @@
 import React from 'react';
 
+import styles from './index.module.scss';
+
 import { log } from '../utils/logger';
 
-import { Button, Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import DefaultLayout from '../components/layouts/DefaultLayout';
 
 const Index = () => {
     return (
-        <DefaultLayout>
-            <Container>
-                <Button color='danger'>Danger!</Button>
-                <h1>I am index page</h1>
-            </Container>
+        <DefaultLayout className={styles.gradientCover}>
+            <div className={styles.backgroundImage} />
+            <div className={styles.rootContainer}>
+                <Container>
+                    <h1 className={styles.redColor}>I am index page</h1>
+                </Container>
+            </div>
         </DefaultLayout>
     );
 };

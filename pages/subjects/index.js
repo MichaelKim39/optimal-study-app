@@ -38,6 +38,7 @@ Subjects.getInitialProps = async () => {
             'https://jsonplaceholder.typicode.com/posts',
         );
         subjects = response.data;
+        log('SUBJECTS: ', subjects);
     } catch (error) {
         log(error);
     }
