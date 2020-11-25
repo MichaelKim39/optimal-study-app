@@ -1,12 +1,17 @@
 import React from 'react';
 
-import Header from '../global/Header/';
+import Header from '../global/Header';
 
 const DefaultLayout = ({ children, className }) => {
     return (
-        <div className={className}>
+        <div>
             <Header />
-            {children}
+            <main
+                style={{ paddingTop: 70, backgroundColor: 'white' }}
+                className={`gradientCover ${className}`}
+            >
+                <div className='wrapper'>{children}</div>
+            </main>
         </div>
     );
 };

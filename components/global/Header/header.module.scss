@@ -1,0 +1,12 @@
+.header {
+    width: 100%;
+    z-index: 20;
+    position: absolute;
+
+    &Brand {
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 30px;
+    }
+}
