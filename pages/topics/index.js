@@ -1,23 +1,19 @@
 import React from 'react';
 import axios from 'axios';
-// import Link from 'next/link';
-import { Link } from '../../routes';
+import Link from 'next/link';
 
-import styles from './Subjects.module.css';
+import styles from './Topics.module.scss';
 
-import { log } from '../../utils/logger';
+import { log } from '@/utils/logger';
 
-import DefaultLayout from '../../components/layouts/DefaultLayout';
+import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Topics = ({ topics }) => {
     const renderTopics = () => {
-        return topics.map((subject) => (
-            <li className={styles.subjectTitle} key={subject.id}>
-                {/* <Link as={`/subject/${subject.id}`} href={'subject/[subjectId]'}>
-                    <a>{subject.title}</a>
-                </Link> */}
-                <Link route={`/topics/${subject.id}`}>
-                    <a>{subject.title}</a>
+        return topics.map((topic) => (
+            <li className={styles.topicTitle} key={topic.id}>
+                <Link as={`/topics/${topic.id}`} href={'topics/[topicId]'}>
+                    <a>{topic.title}</a>
                 </Link>
             </li>
         ));

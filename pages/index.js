@@ -3,10 +3,10 @@ import Typed from 'react-typed';
 
 import styles from './index.module.scss';
 
-import { log } from '../utils/logger';
+import { log } from '@/utils/logger';
 
 import { Container, Row, Col } from 'reactstrap';
-import DefaultLayout from '../components/layouts/DefaultLayout';
+import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Index = () => {
     return (

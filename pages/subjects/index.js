@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-// import Link from 'next/link';
-import { Link } from '../../routes';
+import Link from 'next/link';
 
-import styles from './Subjects.module.css';
+import styles from './Subjects.module.scss';
 
-import { log } from '../../utils/logger';
+import { log } from '@/utils/logger';
 
-import DefaultLayout from '../../components/layouts/DefaultLayout';
+import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = ({ subjects }) => {
     const renderSubjects = () => {
         return subjects.map((subject) => (
             <li className={styles.subjectTitle} key={subject.id}>
-                {/* <Link as={`/subject/${subject.id}`} href={'subject/[subjectId]'}>
-                    <a>{subject.title}</a>
-                </Link> */}
-                <Link route={`/subjects/${subject.id}`}>
+                <Link
+                    as={`/subjects/${subject.id}`}
+                    href={'subjects/[subjectId]'}
+                >
                     <a>{subject.title}</a>
                 </Link>
             </li>
         ));
     };
+
+    const getSubjects = async () => {
+        const response = await fetch('api/v1/subjects');
+        const data = await response.json();
+    };
+
+    useEffect(() => {
+        getSubjects();
+    }, []);
 
     return (
         <DefaultLayout>

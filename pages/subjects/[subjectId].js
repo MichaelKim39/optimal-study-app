@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-import { log } from '../utils/logger';
+import { log } from '@/utils/logger';
 
-import DefaultLayout from '../components/layouts/DefaultLayout';
+import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subject = ({ subject }) => {
     return (
