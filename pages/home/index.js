@@ -6,7 +6,7 @@ import DefaultLayout from '@/components/layouts/DefaultLayout';
 const Home = () => {
     return (
         <DefaultLayout>
-            <h1>I am Home page</h1>
+            <h1>Home page</h1>
         </DefaultLayout>
     );
 };

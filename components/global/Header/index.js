@@ -41,7 +41,7 @@ const Header = () => {
                 <NavbarToggler onClick={handlePressTab} />
                 <Collapse isOpen={isActive} navbar>
                     <Nav className='mr-auto' navbar>
-                        <PageLink label='Landing' />
+                        <PageLink label='About' />
                         <PageLink path='/home' label='Home' />
                         <PageLink path='/subjects' label='Subjects' />
                     </Nav>

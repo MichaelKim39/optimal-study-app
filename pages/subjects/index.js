@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import Link from 'next/link';
 
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
+import { loadSubjects } from '@/actions';
 
+import { Alert, Spinner } from 'reactstrap';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
-const Subjects = ({ subjects }) => {
+const Subjects = () => {
+    const { subjects, getSubjectsError, subjectsLoading } = loadSubjects();
+
     const renderSubjects = () => {
         return subjects.map((subject) => (
             <li className={styles.subjectTitle} key={subject.id}>
@@ -22,35 +25,20 @@ const Subjects = ({ subjects }) => {
         ));
     };
 
-    const getSubjects = async () => {
-        const response = await fetch('api/v1/subjects');
-        const data = await response.json();
-    };
-
-    useEffect(() => {
-        getSubjects();
-    }, []);
-
     return (
         <DefaultLayout>
-            <h1>I am Subjects page</h1>
-            <ul>{renderSubjects()}</ul>
+            <h1>My Subjects</h1>
+            {subjectsLoading ? (
+                <Spinner size='md' color='light' className={styles.spinner} />
+            ) : getSubjectsError ? (
+                <Alert color='danger' className={styles.errorAlert}>
+                    Oops! {getSubjectsError.message}
+                </Alert>
+            ) : (
+                <ul>{renderSubjects()}</ul>
+            )}
         </DefaultLayout>
     );
-};
-
-Subjects.getInitialProps = async () => {
-    let subjects = [];
-    try {
-        const response = await axios.get(
-            'https://jsonplaceholder.typicode.com/posts',
-        );
-        subjects = response.data;
-        log('SUBJECTS: ', subjects);
-    } catch (error) {
-        log(error);
-    }
-    return { subjects: subjects.slice(0, 10) };
 };
 
 export default Subjects;
