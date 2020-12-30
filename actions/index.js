@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
-export const loadSubjects = () => {
-    const [subjects, setSubjects] = useState([]);
-    const [getSubjectsError, setGetSubjectsError] = useState(null);
-    const [subjectsLoading, setSubjectsLoading] = useState(true);
+export const loadData = (url) => {
+    const [data, setData] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const getSubjects = async () => {
-        const response = await fetch('api/v1/subjects');
+    const getData = async () => {
+        const response = await fetch(url);
         const data = await response.json();
         if (response.status === 200) {
-            setSubjects(data);
+            setData(data);
         } else {
-            setGetSubjectsError(data);
+            setError(data);
         }
-        setSubjectsLoading(false);
+        setLoading(false);
     };
 
     useEffect(() => {
-        getSubjects();
+        getData();
     }, []);
 
-    return { subjects, getSubjectsError, subjectsLoading };
+    return [ data, error, loading ];
 };

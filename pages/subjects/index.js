@@ -4,13 +4,13 @@ import Link from 'next/link';
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
-import { loadSubjects } from '@/actions';
+import { loadData } from '@/actions';
 
 import { Alert, Spinner } from 'reactstrap';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = () => {
-    const { subjects, getSubjectsError, subjectsLoading } = loadSubjects();
+    const [subjects, getSubjectsError, subjectsLoading] = loadData('api/v1/subjects');
 
     const renderSubjects = () => {
         return subjects.map((subject) => (
