@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-export const loadData = (url) => {
+export const useFetchData = (url) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const getData = async () => {
+    const fetchData = async () => {
         const response = await fetch(url);
         const data = await response.json();
         if (response.status === 200) {
@@ -17,8 +17,8 @@ export const loadData = (url) => {
     };
 
     useEffect(() => {
-        getData();
-    }, []);
+        url && fetchData();
+    }, [url]);
 
     return [ data, error, loading ];
 };

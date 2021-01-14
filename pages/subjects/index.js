@@ -4,13 +4,14 @@ import Link from 'next/link';
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
-import { loadData } from '@/actions';
+import { useFetchData } from '@/actions';
 
-import { Alert, Spinner } from 'reactstrap';
+import Warning from '@/components/global/Warning'
+import LoadingIndicator from '@/components/global/LoadingIndicator'
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = () => {
-    const [subjects, getSubjectsError, subjectsLoading] = loadData('api/v1/subjects');
+    const [subjects, subjectsError, subjectsLoading] = useFetchData('api/v1/subjects');
 
     const renderSubjects = () => {
         return subjects.map((subject) => (
@@ -29,11 +30,9 @@ const Subjects = () => {
         <DefaultLayout>
             <h1>My Subjects</h1>
             {subjectsLoading ? (
-                <Spinner size='md' color='light' className={styles.spinner} />
-            ) : getSubjectsError ? (
-                <Alert color='danger' className={styles.errorAlert}>
-                    Oops! {getSubjectsError.message}
-                </Alert>
+                <LoadingIndicator className={styles.spinner} />
+            ) : subjectsError ? (
+                <Warning text={subjectsError.message} className={styles.errorAlert}/>
             ) : (
                 <ul>{renderSubjects()}</ul>
             )}
