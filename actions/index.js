@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import useSWR from 'swr'
+import { log } from '@/utils/logger';
 
-export const useFetchData = (url) => {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    const fetchData = async () => {
-        const response = await fetch(url);
-        const data = await response.json();
-        if (response.status === 200) {
-            setData(data);
+const handleFetchData = (url) => {
+    fetch(url).then(async res => {
+        // Response = data || error
+        const response = await res.json()
+        if (res.status !== 200) {
+            return Promise.reject(response)
         } else {
-            setError(data);
+            return response
         }
-        setLoading(false);
-    };
+    })
+}
 
-    useEffect(() => {
-        url && fetchData();
-    }, [url]);
+export const useGetSubjects = () => {
+    const { data, error, ...rest } = useSWR('/api/v1/subjects', handleFetchData)
+    return { data, error, loading: !data && !error, ...rest}
+}
 
-    return [ data, error, loading ];
-};
+export const useGetSubject = (subjectId) => {
+    const { data, error } = useSWR(subjectId ? `/api/v1/subjects/${subjectId}` : null, handleFetchData)
+    const loading = !data && !error
+    return [ data, error, loading ]
+}

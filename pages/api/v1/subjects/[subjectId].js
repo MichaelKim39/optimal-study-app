@@ -12,7 +12,7 @@ const getSubject = async (req, res) => {
         } catch (error) {
         log(error);
         res.status(error.status || 400).json({
-            message: 'Error during GET subjects',
+            message: 'Error during GET subject by Id',
         });
     }
 };

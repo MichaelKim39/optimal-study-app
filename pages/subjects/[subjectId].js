@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { log } from '@/utils/logger';
-import { useFetchData } from '@/actions'
+import { useGetSubject } from '@/actions'
 import { useRouter } from 'next/router'
 
 import styles from './Subject.module.scss';
@@ -14,8 +14,7 @@ import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subject = () => {
     const router = useRouter()
-    const [ subject, subjectError, subjectLoading ] = useFetchData(router.query.subjectId ? `/api/v1/subjects/${router.query.subjectId}` : null)
-
+    const [ subject, subjectError, subjectLoading ] = useGetSubject(router.query.subjectId)
     return (
         <DefaultLayout>
             { subjectLoading ? (<LoadingIndicator />) : 

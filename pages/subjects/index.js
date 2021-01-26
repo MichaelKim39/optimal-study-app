@@ -4,17 +4,17 @@ import Link from 'next/link';
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
-import { useFetchData } from '@/actions';
+import { useGetSubjects } from '@/actions';
 
 import Warning from '@/components/global/Warning'
 import LoadingIndicator from '@/components/global/LoadingIndicator'
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = () => {
-    const [subjects, subjectsError, subjectsLoading] = useFetchData('api/v1/subjects');
-
+    // const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
+    const {data: subjects, error: subjectsError, loading: subjectsLoading} = useGetSubjects()
     const renderSubjects = () => {
-        return subjects.map((subject) => (
+        return subjects?.map((subject) => (
             <li className={styles.subjectTitle} key={subject.id}>
                 <Link
                     as={`/subjects/${subject.id}`}
