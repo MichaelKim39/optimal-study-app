@@ -4,31 +4,15 @@ import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 
 import styles from './header.module.scss';
 
+import NavLink from '../NavLink'
+
 const Header = () => {
     const [isActive, setActive] = useState(false);
     const handlePressTab = () => setActive(!isActive);
 
-    const SigninButton = () => (
-        <NavItem>
-            <span className={`showPointer ${styles.headerNavButton}`}>
-                Signin
-            </span>
-        </NavItem>
-    );
-
-    const SignoutButton = () => (
-        <NavItem>
-            <span className={`showPointer ${styles.headerNavButton}`}>
-                Signout
-            </span>
-        </NavItem>
-    );
-
     const PageLink = ({ path = '/', label }) => (
         <NavItem>
-            <Link href={path}>
-                <a className={`${styles.headerNavButton}`}>{label}</a>
-            </Link>
+            <NavLink label={label} href={path} className={`showPointer ${styles.headerNavButton}`}/>
         </NavItem>
     );
 
@@ -46,8 +30,8 @@ const Header = () => {
                         <PageLink path='/subjects' label='Subjects' />
                     </Nav>
                     <Nav navbar>
-                        <SigninButton />
-                        <SignoutButton />
+                        <PageLink path='/api/v1/signin' label='Signin' />
+                        <PageLink path='/api/v1/signin' label='Signup' />
                     </Nav>
                 </Collapse>
             </Navbar>

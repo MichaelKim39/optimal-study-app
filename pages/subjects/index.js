@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import useSWR from 'swr'
 
 import styles from './Subjects.module.scss';
 
@@ -11,8 +12,8 @@ import LoadingIndicator from '@/components/global/LoadingIndicator'
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = () => {
-    // const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
-    const {data: subjects, error: subjectsError, loading: subjectsLoading} = useGetSubjects()
+    const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
+
     const renderSubjects = () => {
         return subjects?.map((subject) => (
             <li className={styles.subjectTitle} key={subject.id}>

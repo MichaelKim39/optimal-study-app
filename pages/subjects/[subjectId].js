@@ -15,6 +15,7 @@ import DefaultLayout from '@/components/layouts/DefaultLayout';
 const Subject = () => {
     const router = useRouter()
     const [ subject, subjectError, subjectLoading ] = useGetSubject(router.query.subjectId)
+    
     return (
         <DefaultLayout>
             { subjectLoading ? (<LoadingIndicator />) : 
