@@ -1,10 +1,13 @@
 import React from 'react';
 
+import { useGetMe } from '@/actions/user'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/main.scss';
 
 const App = ({ Component, pageProps }) => {
-    return <Component {...pageProps} />;
+    const [ myInfo, myInfoError, myInfoLoading ] = useGetMe()
+    return <Component userInfo={myInfo} userLoading={myInfoLoading} {...pageProps} />;
 };
 
 App.getInitialProps = async ({ Component, ctx }) => {

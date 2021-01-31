@@ -10,8 +10,9 @@ import { useGetSubjects } from '@/actions';
 import Warning from '@/components/global/Warning'
 import LoadingIndicator from '@/components/global/LoadingIndicator'
 import DefaultLayout from '@/components/layouts/DefaultLayout';
+import Navigate from '@/components/global/Navigate'
 
-const Subjects = () => {
+const Subjects = ({ userInfo, userLoading }) => {
     const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
 
     const renderSubjects = () => {
@@ -28,17 +29,20 @@ const Subjects = () => {
     };
 
     return (
-        <DefaultLayout>
-            <h1>My Subjects</h1>
-            {subjectsLoading ? (
-                <LoadingIndicator className={styles.spinner} />
-            ) : subjectsError ? (
-                <Warning text={subjectsError.message} className={styles.errorAlert}/>
-            ) : (
-                <ul>{renderSubjects()}</ul>
-            )}
-        </DefaultLayout>
-    );
-};
+        <Navigate condition={!userInfo} route='/api/v1/signin'>
+            <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
+                <h1>My Subjects</h1>
+                {subjectsLoading ? (
+                    <LoadingIndicator className={styles.spinner} />
+                ) : subjectsError ? (
+                    <Warning text={subjectsError.message} className={styles.errorAlert}/>
+                ) : (
+                    <ul>{renderSubjects()}</ul>
+                )}
+            </DefaultLayout>
+        </Navigate>
+    )    
+
+}
 
 export default Subjects;

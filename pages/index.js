@@ -8,9 +8,10 @@ import { log } from '@/utils/logger';
 import { Container, Row, Col } from 'reactstrap';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
-const Index = () => {
+const Index = ({ userInfo, userLoading }) => {
+
     return (
-        <DefaultLayout>
+        <DefaultLayout  userInfo={userInfo} userLoading={userLoading}>
             <div className={styles.mainContainer}>
                 <Container>
                     <div className={styles.logoContainer}>

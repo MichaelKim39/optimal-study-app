@@ -8,7 +8,7 @@ import { log } from '@/utils/logger';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
-const Topics = ({ topics }) => {
+const Topics = ({ topics, userInfo, userLoading }) => {
     const renderTopics = () => {
         return topics.map((topic) => (
             <li className={styles.topicTitle} key={topic.id}>
@@ -20,7 +20,7 @@ const Topics = ({ topics }) => {
     };
 
     return (
-        <DefaultLayout>
+        <DefaultLayout  userInfo={userInfo} userLoading={userLoading}>
             <h1>I am Topics page</h1>
             <ul>{renderTopics()}</ul>
         </DefaultLayout>
