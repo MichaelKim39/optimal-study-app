@@ -6,11 +6,11 @@ import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
 import { useGetSubjects } from '@/actions';
+import withAuthCheck from '@/hoc/withAuthCheck'
 
 import Warning from '@/components/global/Warning'
 import LoadingIndicator from '@/components/global/LoadingIndicator'
 import DefaultLayout from '@/components/layouts/DefaultLayout';
-import Navigate from '@/components/global/Navigate'
 
 const Subjects = ({ userInfo, userLoading }) => {
     const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
@@ -29,7 +29,6 @@ const Subjects = ({ userInfo, userLoading }) => {
     };
 
     return (
-        <Navigate condition={!userInfo} route='/api/v1/signin'>
             <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
                 <h1>My Subjects</h1>
                 {subjectsLoading ? (
@@ -40,9 +39,8 @@ const Subjects = ({ userInfo, userLoading }) => {
                     <ul>{renderSubjects()}</ul>
                 )}
             </DefaultLayout>
-        </Navigate>
     )    
 
 }
 
-export default Subjects;
+export default withAuthCheck(Subjects);

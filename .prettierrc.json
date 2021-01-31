@@ -4,6 +4,5 @@
   "jsxSingleQuote": true,
   "semi": true,
   "singleQuote": true,
-  "printWidth": 80,
-  "disableLanguages": []
+  "printWidth": 80
 }
