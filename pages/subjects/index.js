@@ -1,19 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
-import useSWR from 'swr'
+import useSWR from 'swr';
 
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
 import { useGetSubjects } from '@/actions';
-import withAuthCheck from '@/hoc/withAuthCheck'
+import withAuthCheck from '@/hoc/withAuthCheck';
 
-import Warning from '@/components/global/Warning'
-import LoadingIndicator from '@/components/global/LoadingIndicator'
+import Warning from '@/components/global/Warning';
+import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Subjects = ({ userInfo, userLoading }) => {
-    const [subjects, subjectsError, subjectsLoading] = useGetSubjects()
+    const [subjects, subjectsError, subjectsLoading] = useGetSubjects();
 
     const renderSubjects = () => {
         return subjects?.map((subject) => (
@@ -29,18 +29,20 @@ const Subjects = ({ userInfo, userLoading }) => {
     };
 
     return (
-            <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
-                <h1>My Subjects</h1>
-                {subjectsLoading ? (
-                    <LoadingIndicator className={styles.spinner} />
-                ) : subjectsError ? (
-                    <Warning text={subjectsError.message} className={styles.errorAlert}/>
-                ) : (
-                    <ul>{renderSubjects()}</ul>
-                )}
-            </DefaultLayout>
-    )    
-
-}
+        <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
+            <h1>My Subjects</h1>
+            {subjectsLoading ? (
+                <LoadingIndicator className={styles.spinner} />
+            ) : subjectsError ? (
+                <Warning
+                    text={subjectsError.message}
+                    className={styles.errorAlert}
+                />
+            ) : (
+                <ul>{renderSubjects()}</ul>
+            )}
+        </DefaultLayout>
+    );
+};
 
 export default withAuthCheck(Subjects);

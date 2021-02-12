@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from 'reactstrap';
 
-import { log } from '@/utils/logger'
+import { log } from '@/utils/logger';
 
 import styles from './header.module.scss';
 
-import NavLink from '../NavLink'
+import NavLink from '../NavLink';
 
 const Header = ({ userInfo, userLoading }) => {
     const [isActive, setActive] = useState(false);
@@ -14,10 +14,14 @@ const Header = ({ userInfo, userLoading }) => {
 
     const PageLink = ({ path = '/', label }) => (
         <NavItem>
-            <NavLink label={label} href={path} className={`showPointer ${styles.headerNavButton}`}/>
+            <NavLink
+                label={label}
+                href={path}
+                className={`showPointer ${styles.headerNavButton}`}
+            />
         </NavItem>
     );
-    
+
     return (
         <div>
             <Navbar className={styles.header} color='light' light expand='md'>
@@ -27,18 +31,16 @@ const Header = ({ userInfo, userLoading }) => {
                 <NavbarToggler onClick={handlePressTab} />
                 <Collapse isOpen={isActive} navbar>
                     <Nav className='mr-auto' navbar>
-                        <PageLink label='About' />
+                        <PageLink path='/about' label='About' />
                         <PageLink path='/home' label='Home' />
                         <PageLink path='/subjects' label='Subjects' />
                     </Nav>
                     <Nav navbar>
-                        {
-                            !!userInfo ? (
-                                <PageLink path='/api/v1/signout' label='Signout' />
-                                ) : (
-                                <PageLink path='/api/v1/signin' label='Signin' />
-                            )
-                        }
+                        {!!userInfo ? (
+                            <PageLink path='/api/v1/signout' label='Signout' />
+                        ) : (
+                            <PageLink path='/api/v1/signin' label='Signin' />
+                        )}
                     </Nav>
                 </Collapse>
             </Navbar>
