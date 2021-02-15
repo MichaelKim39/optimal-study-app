@@ -6,12 +6,11 @@ import withAuthSSR from '@/hoc/withAuthSSR';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
-const About = ({ userInfo, text }) => {
-    debugger;
+const About = ({ userInfo, text, error }) => {
     return (
         <DefaultLayout userInfo={userInfo} userLoading={false}>
             <h1>About page - hello {userInfo.name}</h1>
-            <p>{text}</p>
+            <p>{error ? error : text}</p>
         </DefaultLayout>
     );
 };
@@ -24,9 +23,11 @@ const getAboutText = () => {
     });
 };
 
-export const getServerSideProps = withAuthSSR(async () => {
+const getExtraProps = async () => {
     const aboutText = await getAboutText();
     return aboutText;
-});
+};
+
+export const getServerSideProps = withAuthSSR(getExtraProps, 'admin');
 
 export default About;

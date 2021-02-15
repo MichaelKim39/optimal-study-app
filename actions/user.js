@@ -11,6 +11,7 @@ export const useGetMe = () => {
     return [data, error, loading];
 };
 
+// Checks if user is authenticated and returns user information if so
 export const resolveAuth = async (req, res) => {
     const session = await auth0.getSession(req);
     if (!session || !session.user) {
@@ -21,4 +22,12 @@ export const resolveAuth = async (req, res) => {
         return;
     }
     return { user: session.user };
+};
+
+// Take user information and role and checks permission
+export const checkPermission = (userInfo, role) => {
+    const hasPermission = userInfo
+        ? userInfo[`${process.env.APP_NAMESPACE}/roles`].includes(role)
+        : false;
+    return hasPermission;
 };
