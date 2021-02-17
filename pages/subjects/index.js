@@ -5,21 +5,21 @@ import useSWR from 'swr';
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
-import { useGetSubjects } from '@/actions';
 import withAuthCheck from '@/hoc/withAuthCheck';
 
 import Warning from '@/components/global/Warning';
 import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
-const Subjects = ({ userInfo, userLoading }) => {
-    const [subjects, subjectsError, subjectsLoading] = useGetSubjects();
+import SubjectsAPI from '@/libs/api/subjectsAPI';
 
+const Subjects = ({ userInfo, userLoading, subjects }) => {
+    log('SUBJECTS: ', subjects);
     const renderSubjects = () => {
         return subjects?.map((subject) => (
-            <li className={styles.subjectTitle} key={subject.id}>
+            <li className={styles.subjectTitle} key={subject._id}>
                 <Link
-                    as={`/subjects/${subject.id}`}
+                    as={`/subjects/${subject._id}`}
                     href={'subjects/[subjectId]'}
                 >
                     <a>{subject.title}</a>
@@ -31,7 +31,7 @@ const Subjects = ({ userInfo, userLoading }) => {
     return (
         <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
             <h1>My Subjects</h1>
-            {subjectsLoading ? (
+            {/* {subjectsLoading ? (
                 <LoadingIndicator className={styles.spinner} />
             ) : subjectsError ? (
                 <Warning
@@ -40,9 +40,19 @@ const Subjects = ({ userInfo, userLoading }) => {
                 />
             ) : (
                 <ul>{renderSubjects()}</ul>
-            )}
+            )} */}
+            <ul>{renderSubjects()}</ul>
         </DefaultLayout>
     );
 };
 
-export default withAuthCheck(Subjects);
+export async function getStaticProps() {
+    const subjectsJSON = await new SubjectsAPI().getSubjects();
+    const subjects = subjectsJSON.data;
+    return {
+        props: { subjects },
+    };
+}
+
+// TODO: Figure out why withAuthCheck is failing here
+export default Subjects;
