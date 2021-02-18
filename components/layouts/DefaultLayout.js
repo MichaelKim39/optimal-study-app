@@ -2,12 +2,25 @@ import React from 'react';
 
 import Header from '../global/Header';
 
-const DefaultLayout = ({ children, className, userInfo, userLoading }) => {
+const DefaultLayout = ({
+    children,
+    className,
+    userInfo,
+    userLoading,
+    showHeader = true,
+    isHeaderTransparent = false,
+}) => {
     return (
         <div>
-            <Header userInfo={userInfo} userLoading={userLoading} />
+            {showHeader && (
+                <Header
+                    userInfo={userInfo}
+                    userLoading={userLoading}
+                    isTransparent={isHeaderTransparent}
+                />
+            )}
             <main
-                style={{ paddingTop: 70, backgroundColor: 'white' }}
+                style={{ paddingTop: 100, backgroundColor: 'white' }}
                 className={`gradientCover ${className}`}
             >
                 <div className='wrapper'>{children}</div>

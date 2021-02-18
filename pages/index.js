@@ -9,9 +9,12 @@ import { Container, Row, Col } from 'reactstrap';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 
 const Index = ({ userInfo, userLoading }) => {
-
     return (
-        <DefaultLayout  userInfo={userInfo} userLoading={userLoading}>
+        <DefaultLayout
+            userInfo={userInfo}
+            userLoading={userLoading}
+            isHeaderTransparent={true}
+        >
             <div className={styles.mainContainer}>
                 <Container>
                     <div className={styles.logoContainer}>

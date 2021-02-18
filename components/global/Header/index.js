@@ -8,25 +8,32 @@ import styles from './header.module.scss';
 
 import NavLink from '../NavLink';
 
-const Header = ({ userInfo, userLoading }) => {
+const Header = ({ userInfo, userLoading, isTransparent = false }) => {
     const [isActive, setActive] = useState(false);
     const handlePressTab = () => setActive(!isActive);
+    const textColor = isTransparent ? 'lightText' : 'darkText';
 
     const PageLink = ({ path = '/', label }) => (
         <NavItem>
             <NavLink
                 label={label}
                 href={path}
-                className={`showPointer ${styles.headerNavButton}`}
+                className={`showPointer ${styles.headerNavButton} ${textColor}`}
             />
         </NavItem>
     );
 
     return (
         <div>
-            <Navbar className={styles.header} color='light' light expand='md'>
+            <Navbar
+                className={styles.header}
+                color={isTransparent ? 'transparent' : 'light'}
+                expand='md'
+            >
                 <Link href='/'>
-                    <a className={`${styles.headerBrand}`}>Learn 2 Learn</a>
+                    <a className={`${styles.headerBrand} ${textColor}`}>
+                        Learn 2 Learn
+                    </a>
                 </Link>
                 <NavbarToggler onClick={handlePressTab} />
                 <Collapse isOpen={isActive} navbar>

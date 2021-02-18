@@ -9,5 +9,7 @@ module.exports = {
     },
     env: {
         APP_NAMESPACE: process.env.APP_NAMESPACE,
+        API_BASE_URL: process.env.API_BASE_URL,
+        LOCAL_BASE_URL: process.env.LOCAL_BASE_URL,
     },
 };

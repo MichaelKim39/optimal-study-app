@@ -1,47 +1,28 @@
 import React from 'react';
-import Link from 'next/link';
-import useSWR from 'swr';
+import { Row, Col } from 'reactstrap';
 
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
+import SubjectsAPI from '@/libs/api/subjectsAPI';
 import withAuthCheck from '@/hoc/withAuthCheck';
 
-import Warning from '@/components/global/Warning';
-import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
-
-import SubjectsAPI from '@/libs/api/subjectsAPI';
+import PageLayout from '@/components/layouts/PageLayout';
+import SubjectContainer from './components/SubjectContainer';
 
 const Subjects = ({ userInfo, userLoading, subjects }) => {
-    log('SUBJECTS: ', subjects);
-    const renderSubjects = () => {
-        return subjects?.map((subject) => (
-            <li className={styles.subjectTitle} key={subject._id}>
-                <Link
-                    as={`/subjects/${subject._id}`}
-                    href={'subjects/[subjectId]'}
-                >
-                    <a>{subject.title}</a>
-                </Link>
-            </li>
-        ));
-    };
-
     return (
         <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
-            <h1>My Subjects</h1>
-            {/* {subjectsLoading ? (
-                <LoadingIndicator className={styles.spinner} />
-            ) : subjectsError ? (
-                <Warning
-                    text={subjectsError.message}
-                    className={styles.errorAlert}
-                />
-            ) : (
-                <ul>{renderSubjects()}</ul>
-            )} */}
-            <ul>{renderSubjects()}</ul>
+            <PageLayout>
+                <Row className={styles.subjectsContainer}>
+                    {subjects?.map((subject) => (
+                        <Col key={subject._id} md='3'>
+                            <SubjectContainer subject={subject} />
+                        </Col>
+                    ))}
+                </Row>
+            </PageLayout>
         </DefaultLayout>
     );
 };

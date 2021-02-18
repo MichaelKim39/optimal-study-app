@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class SubjectsAPI {
     getSubjects() {
-        return axios.get('http://localhost:3001/api/v1/subjects');
+        return axios.get(`${process.env.API_BASE_URL}/subjects`);
     }
 }
 
