@@ -21,7 +21,7 @@ const Subjects = ({ userInfo, userLoading, subjects }) => {
 
     return (
         <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
-            <PageLayout>
+            <PageLayout pageTitle='Subjects'>
                 <Row className={styles.subjectsContainer}>
                     {subjects?.map((subject) => (
                         <Col
