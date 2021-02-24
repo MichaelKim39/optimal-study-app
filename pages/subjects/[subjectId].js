@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
+import { Row, Col } from 'reactstrap';
+import { useRouter } from 'next/router';
 
 import { log } from '@/utils/logger';
-import { useRouter } from 'next/router';
 import SubjectsAPI from '@/libs/api/SubjectsAPI';
 
 import styles from './Subject.module.scss';
@@ -12,10 +12,26 @@ import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
 
+import TopicContainer from './components/TopicContainer';
+
 const Subject = ({ subject }) => {
+    const topics = subject?.data?.topics;
+
     return (
         <DefaultLayout>
-            <PageLayout>{JSON.stringify(subject)}</PageLayout>
+            <PageLayout pageTitle={subject.data.title}>
+                <Row className={styles.topicsContainer}>
+                    {topics.map((topic) => (
+                        <Col
+                            key={topic._id}
+                            md='4'
+                            onClick={() => log('Open Topic')}
+                        >
+                            <TopicContainer topic={topic} />
+                        </Col>
+                    ))}
+                </Row>
+            </PageLayout>
         </DefaultLayout>
     );
 };
