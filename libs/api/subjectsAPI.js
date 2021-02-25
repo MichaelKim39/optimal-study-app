@@ -12,6 +12,10 @@ class SubjectsAPI {
     getSubject(subjectId) {
         return axios.get(`${this.subjectsApiUrl}/${subjectId}`);
     }
+
+    addSubject(subject) {
+        return axios.post(`${this.subjectsApiUrl}`, subject);
+    }
 }
 
 export default SubjectsAPI;

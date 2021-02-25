@@ -23,18 +23,22 @@ const AddSubjectsForm = ({ onSubmitSubject }) => {
             // className={styles.addSubjectForm}
         >
             <FormGroup>
-                <Label for='subjectTitle'>Subject</Label>
+                <Label for='subjectTitle' className={styles.subjectInput}>
+                    Subject
+                </Label>
                 <Input
                     innerRef={register}
                     type='text'
-                    name='subject'
+                    name='title'
                     id='subjectTitle'
                     placeholder='Name of subject'
                     className={styles.addSubjectsFormInput}
                 />
             </FormGroup>
             <FormGroup>
-                <Label for='subjectDesc'>Description</Label>
+                <Label for='subjectDesc' className={styles.subjectInput}>
+                    Description
+                </Label>
                 <Input
                     innerRef={register}
                     type='text'
@@ -44,8 +48,10 @@ const AddSubjectsForm = ({ onSubmitSubject }) => {
                     className={styles.addSubjectsFormInput}
                 />
             </FormGroup>
-            <FormGroup>
-                <Label for='subjectImage'>Image</Label>
+            {/* <FormGroup>
+                <Label for='subjectImage' className={styles.subjectInput}>
+                    Image
+                </Label>
                 <Input
                     innerRef={register}
                     type='file'
@@ -56,7 +62,7 @@ const AddSubjectsForm = ({ onSubmitSubject }) => {
                 <FormText color='white'>
                     Browse PC files for an image to represent this subject.
                 </FormText>
-            </FormGroup>
+            </FormGroup> */}
             <Button type='submit'>Submit</Button>
         </Form>
     );
