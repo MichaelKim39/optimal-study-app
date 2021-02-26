@@ -5,17 +5,26 @@ import { useRouter } from 'next/router';
 import { log } from '@/utils/logger';
 import SubjectsAPI from '@/libs/api/SubjectsAPI';
 
-import styles from './Subject.module.scss';
+import styles from '../Subject.module.scss';
 
 import Warning from '@/components/global/Warning';
 import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
 
-import TopicContainer from './components/TopicContainer';
+import TopicContainer from '../components/TopicContainer';
 
 const Subject = ({ subject }) => {
+    const router = useRouter();
     const topics = subject?.data?.topics;
+
+    const handlePressTopic = (topic) => {
+        log('Topic Press');
+        router.push(
+            '/subjects/[subjectId]/[topicId]',
+            `/subjects/${subject.data._id}/${topic._id}`,
+        );
+    };
 
     return (
         <DefaultLayout>
@@ -25,7 +34,7 @@ const Subject = ({ subject }) => {
                         <Col
                             key={topic._id}
                             md='4'
-                            onClick={() => log('Open Topic')}
+                            onClick={() => handlePressTopic(topic)}
                         >
                             <TopicContainer topic={topic} />
                         </Col>

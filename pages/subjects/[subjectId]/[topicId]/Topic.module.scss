@@ -1,0 +1,28 @@
+.root {
+    padding-bottom: 50px;
+}
+.topicHeader {
+    width: 20px;
+}
+.topicImage {
+    border: 2px solid lightgray;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+.tabContainer {
+    background-color: white;
+    height: 80vh;
+    padding: 30px;
+    border-radius: 0px 0px 20px 20px;
+}
+.tab {
+    &Active {
+        background-color: lightskyblue;
+        font-weight: bold;
+    }
+    &Inactive {
+        background-color: lightgray;
+        font-weight: bold;
+    }
+}

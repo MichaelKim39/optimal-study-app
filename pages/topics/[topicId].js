@@ -5,17 +5,17 @@ import { useRouter } from 'next/router';
 import { log } from '@/utils/logger';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
+import PageLayout from '@/components/layouts/PageLayout';
 
 const Topic = ({ topic }) => {
     const router = useRouter();
 
-    log('topic', topic);
-
     return (
         <DefaultLayout>
-            <h1>{topic.title}</h1>
-            <p>Topic Description: {topic.body}</p>
-            <p>Topic ID: {topic.id}</p>
+            <PageLayout pageTitle={'Topic Title'}>
+                <p>Topic Description: {topic.body}</p>
+                <p>Topic ID: {topic.id}</p>
+            </PageLayout>
         </DefaultLayout>
     );
 };
