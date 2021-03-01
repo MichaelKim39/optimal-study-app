@@ -1,8 +1,15 @@
 import axios from 'axios';
 
 class SubjectsAPI {
-    constructor() {
+    constructor(jwt) {
         this.subjectsApiUrl = `${process.env.API_BASE_URL}/subjects`;
+
+        this.config = {};
+        if (!!jwt) {
+            this.config.headers = {
+                authorization: `Bearer ${jwt}`,
+            };
+        }
     }
 
     getSubjects() {
@@ -14,7 +21,7 @@ class SubjectsAPI {
     }
 
     addSubject(subject) {
-        return axios.post(`${this.subjectsApiUrl}`, subject);
+        return axios.post(`${this.subjectsApiUrl}`, subject, this.config);
     }
 }
 

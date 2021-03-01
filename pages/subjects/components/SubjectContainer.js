@@ -18,7 +18,7 @@ const SubjectContainer = ({ subject }) => {
     const TopicsList = () => {
         return (
             <ListGroup>
-                {subject.topics.map((topic) => (
+                {subject.topics.slice(0, 3).map((topic) => (
                     <ListGroupItem key={topic._id}>{topic.title}</ListGroupItem>
                 ))}
             </ListGroup>
