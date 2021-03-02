@@ -1,5 +1,12 @@
 .gradientCover {
-    background-image: linear-gradient(45deg, #77dbff 0%, #2e8acc 100%);
+    // background-image: linear-gradient(45deg, #77dbff 0%, #2e8acc 100%);
+    background: rgb(111, 108, 170);
+    background: linear-gradient(
+        135deg,
+        rgba(111, 108, 170, 1) 12%,
+        rgba(84, 184, 221, 1) 56%,
+        rgba(46, 138, 204, 1) 82%
+    );
     max-width: 100%;
     overflow: hidden;
 }

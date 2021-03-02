@@ -17,6 +17,8 @@ export const useGetSubject = (subjectId) => {
         subjectId ? `/api/v1/subjects/${subjectId}` : null,
         handleFetchData,
     );
+    // debugger;
     const loading = !data && !error;
+
     return [data, error, loading];
 };

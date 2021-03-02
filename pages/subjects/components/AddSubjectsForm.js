@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Button,
     Form,
@@ -15,11 +15,18 @@ import styles from '../Subjects.module.scss';
 import { log } from '@/utils/logger';
 
 const AddSubjectsForm = ({ onSubmitSubject, prefillData = {} }) => {
-    const { register, handleSubmit } = useForm({ defaultValues: prefillData });
+    const { register, handleSubmit, errors, reset } = useForm({
+        defaultValues: prefillData,
+    });
+
+    // useEffect(() => {
+    //     log('Resetting data...');
+    //     reset(prefillData);
+    // }, [prefillData]);
 
     return (
         <Form
-            onSubmit={handleSubmit(onSubmitSubject)}
+            onSubmit={() => handleSubmit(onSubmitSubject)}
             // className={styles.addSubjectForm}
         >
             <FormGroup>

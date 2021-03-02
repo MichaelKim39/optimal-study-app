@@ -22,10 +22,12 @@ const EditSubjectPage = ({ userInfo, userLoading }) => {
         <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
             <PageLayout pageTitle='Edit Subject'>
                 <AddSubjectsForm
-                    prefillData={subjectData}
+                    prefillData={subjectData?.data}
                     onSubmitSubject={handleSubmitSubject}
                 />
-                {subjectError && <Alert color='danger'>{subjectError}</Alert>}
+                {subjectError && (
+                    <Alert color='danger'>{JSON.stringify(subjectError)}</Alert>
+                )}
             </PageLayout>
         </DefaultLayout>
     );
