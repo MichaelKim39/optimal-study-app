@@ -47,6 +47,15 @@
     font-size: 20px;
     font-weight: 700;
 }
+.headerButton {
+    height: 40px;
+    margin-left: 5px;
+}
+.headerRow {
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+}
 
 // ADD SUBJECTS FORM
 .addSubjectsFormInput {

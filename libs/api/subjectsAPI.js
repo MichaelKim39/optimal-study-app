@@ -25,6 +25,18 @@ class SubjectsAPI {
     addSubject(subject) {
         return axios.post(`${this.subjectsApiUrl}`, subject, this.config);
     }
+
+    editSubject(subjectId, newSubject) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}`,
+            newSubject,
+            this.config,
+        );
+    }
+
+    deleteSubject(subjectId) {
+        return axios.delete(`${this.subjectsApiUrl}/${subjectId}`, this.config);
+    }
 }
 
 export default SubjectsAPI;

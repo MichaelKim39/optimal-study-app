@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import styles from './Layouts.module.scss';
 
@@ -11,6 +12,7 @@ const PageLayout = ({ children, className, pageTitle }) => {
                 )}
                 {children}
             </main>
+            <ToastContainer />
         </div>
     );
 };

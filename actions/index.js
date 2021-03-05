@@ -22,7 +22,7 @@ export const useGetData = (url) => {
 
 export const useReqStatus = (
     apiRequest,
-    errorMessage = 'Error During API Request',
+    defaultErrorMessage = 'Error During API Request',
 ) => {
     const INIT_STATUS = {
         loading: true,
@@ -31,22 +31,25 @@ export const useReqStatus = (
     };
     const [reqStatus, setReqStatus] = useState(INIT_STATUS);
 
-    const handleRequest = async (inputData) => {
+    const handleRequest = async (...inputData) => {
         setReqStatus(INIT_STATUS);
         try {
-            const response = await apiRequest(inputData);
+            const response = await apiRequest(...inputData);
             setReqStatus({
                 loading: false,
                 data: response.data,
                 error: null,
             });
+            return response.data;
         } catch (error) {
             log('Error during API request:', error);
+            const errorMessage = error.response?.data || defaultErrorMessage;
             setReqStatus({
                 loading: false,
                 data: null,
-                error: error.response?.data || errorMessage,
+                error: errorMessage,
             });
+            return Promise.reject(errorMessage);
         }
     };
 

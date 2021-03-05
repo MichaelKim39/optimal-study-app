@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Alert } from 'reactstrap';
 
+import styles from './Subject.module.scss';
+
+import { log } from '@/utils/logger';
 import withAuthCheck from '@/hoc/withAuthCheck';
 import { useAddSubject } from '@/actions/subjects';
 
@@ -17,7 +20,7 @@ const AddSubjectPage = ({ userInfo, userLoading }) => {
         error: subjectError,
     } = subjectAddStatus;
 
-    if (subjectData) {
+    if (!!subjectData) {
         return <Navigate route='/subjects' />;
     }
 
