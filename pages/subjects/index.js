@@ -1,6 +1,8 @@
-import React from 'react';
-import { Row, Col } from 'reactstrap';
+import React, { useState } from 'react';
+import { Row, Col, Button } from 'reactstrap';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './Subjects.module.scss';
 
@@ -14,13 +16,14 @@ import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
 import SubjectContainer from './components/SubjectContainer';
 
-const Subjects = ({ userInfo, userLoading, subjects }) => {
+const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
     const router = useRouter();
     const [handleDeleteSubject, deleteSubjectStatus] = useDeleteSubject();
     const {
         data: deletedSubject,
         error: deleteSubjectError,
     } = deleteSubjectStatus;
+    const [subjects, setSubjects] = useState(initialSubjects);
 
     const handleOpenSubject = (subjectId) => {
         router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
@@ -42,12 +45,39 @@ const Subjects = ({ userInfo, userLoading, subjects }) => {
             )
         ) {
             await handleDeleteSubject(subjectId);
+            setSubjects(
+                subjects.filter((subject) => subject._id !== subjectId),
+            );
+            toast.success('✅ Subject Succesfully Deleted!', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
+    };
+
+    const AddSubjectButton = () => {
+        return (
+            <FontAwesomeIcon
+                icon='plus-circle'
+                color='white'
+                size='2x'
+                onClick={() => router.push('/subjects/add')}
+                className={styles.addSubjectButton}
+            />
+        );
     };
 
     return (
         <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
-            <PageLayout pageTitle='Subjects'>
+            <PageLayout
+                pageTitle='Subjects'
+                titleAccessory={<AddSubjectButton />}
+            >
                 <Row className={styles.subjectsContainer}>
                     {subjects?.map((subject) => (
                         <Col
