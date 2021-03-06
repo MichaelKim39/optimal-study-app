@@ -5,6 +5,11 @@ module.exports = {
     webpack: (config) => {
         config.resolve.alias['@'] = path.resolve(__dirname);
         config.plugins.push(new Dotenv({ silent: true }));
+        config.node = {
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        };
         return config;
     },
     env: {

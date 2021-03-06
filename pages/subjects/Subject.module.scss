@@ -4,6 +4,13 @@
     align-items: center;
     padding: 20px 80px;
 }
+.addTopicButton {
+    &:hover {
+        color: #e97a13;
+        cursor: pointer;
+        transform: translateY(-2px);
+    }
+}
 
 // SUBJECTS CONTAINER
 .topicContainer {

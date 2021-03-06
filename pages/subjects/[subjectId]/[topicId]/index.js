@@ -3,9 +3,6 @@ import { useRouter } from 'next/router';
 import {
     TabContent,
     TabPane,
-    Nav,
-    NavItem,
-    NavLink,
     Card,
     Button,
     CardTitle,
@@ -16,69 +13,21 @@ import {
 
 import styles from './Topic.module.scss';
 
+import { getMotivationalQuote } from '@/actions/quotes';
 import { log } from '@/utils/logger';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
+import TopicTabHeader from './components/TopicTabHeader';
+import NotesTab from './components/NotesTab';
 
-const Topic = ({ topic }) => {
+const Topic = ({ topic, quote }) => {
     const [currentTab, setCurrentTab] = useState(1);
 
     const changeTabs = (tabNumber) => {
         if (currentTab !== tabNumber) {
             setCurrentTab(tabNumber);
         }
-    };
-
-    const TabHeader = () => {
-        const isTabOpen = (tabNumber) => {
-            return currentTab === tabNumber;
-        };
-        return (
-            <Nav tabs fill pills className={styles.tabHeader}>
-                <NavItem>
-                    <NavLink
-                        className={[
-                            { active: isTabOpen(1) },
-                            isTabOpen(1)
-                                ? styles.tabActive
-                                : styles.tabInactive,
-                        ]}
-                        onClick={() => {
-                            changeTabs(1);
-                        }}
-                    >
-                        Notes
-                    </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={[
-                            { active: isTabOpen(2) },
-                            isTabOpen(2)
-                                ? styles.tabActive
-                                : styles.tabInactive,
-                        ]}
-                        onClick={() => {
-                            changeTabs(2);
-                        }}
-                    >
-                        Cards
-                    </NavLink>
-                </NavItem>
-            </Nav>
-        );
-    };
-
-    const NotesTab = () => {
-        return (
-            <TabPane tabId={1}>
-                <div className={styles.tabContainer}>
-                    <h1>Notes</h1>
-                    <p>{topic.description}</p>
-                </div>
-            </TabPane>
-        );
     };
 
     const CardsTab = () => {
@@ -93,13 +42,22 @@ const Topic = ({ topic }) => {
 
     return (
         <DefaultLayout className={styles.root}>
-            <PageLayout pageTitle={topic.title}>
-                <div className={styles.topicImage}>
-                    <img src={topic.image} width='100%' height={300} />
-                </div>
-                <TabHeader />
+            <PageLayout
+                pageTitle={topic.title}
+                pageSubTitle={topic.description}
+            >
+                <Row>
+                    <div className={styles.topicImage}>
+                        <img src={topic.image} width='100%' height={300} />
+                    </div>
+                    <blockquote className={styles.quote}>{quote}</blockquote>
+                </Row>
+                <TopicTabHeader
+                    currentTab={currentTab}
+                    changeTabs={changeTabs}
+                />
                 <TabContent activeTab={currentTab}>
-                    <NotesTab />
+                    <NotesTab notes={topic.notes} />
                     <CardsTab />
                 </TabContent>
             </PageLayout>
@@ -108,8 +66,6 @@ const Topic = ({ topic }) => {
 };
 
 export async function getServerSideProps({ query }) {
-    // const topicJSON = JSON.stringify({ title: 'Topic 1' });
-    // const topic = topicJSON.data;
     const topic = {
         title: 'topic 1',
         description: 'topic description',
@@ -118,9 +74,13 @@ export async function getServerSideProps({ query }) {
         image:
             'https://images.unsplash.com/photo-1585399000684-d2f72660f092?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80',
     };
-    log('Query: ', query);
+    // log('Query: ', query);
+
+    // const quote = getMotivationalQuote()
+    const quote = 'Motivation quote here';
+
     return {
-        props: { topic },
+        props: { topic, quote },
     };
 }
 

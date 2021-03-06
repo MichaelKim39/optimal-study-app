@@ -1,5 +1,10 @@
+// TOPIC PAGE
 .root {
     padding-bottom: 50px;
+}
+.topicDescription {
+    color: white;
+    padding: 10px 20px;
 }
 .topicHeader {
     width: 20px;
@@ -9,7 +14,24 @@
     border-radius: 25px;
     overflow: hidden;
     margin-bottom: 50px;
+    width: 45%;
 }
+.quote {
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    border: 5px solid lightgray;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    padding: 15px;
+    width: 45%;
+    text-align: center;
+    align-items: center;
+}
+
+// TABS
 .tabContainer {
     background-color: white;
     height: 80vh;

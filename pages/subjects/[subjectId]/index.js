@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { log } from '@/utils/logger';
 import SubjectsAPI from '@/libs/api/SubjectsAPI';
@@ -26,9 +27,24 @@ const Subject = ({ subject }) => {
         );
     };
 
+    const AddTopicButton = () => {
+        return (
+            <FontAwesomeIcon
+                icon='plus-circle'
+                color='white'
+                size='2x'
+                onClick={() => router.push(`/subjects/${subject.data._id}/add`)}
+                className={styles.addTopicButton}
+            />
+        );
+    };
+
     return (
         <DefaultLayout>
-            <PageLayout pageTitle={subject.data.title}>
+            <PageLayout
+                pageTitle={subject.data.title}
+                titleAccessory={<AddTopicButton />}
+            >
                 <Row className={styles.topicsContainer}>
                     {topics.map((topic) => (
                         <Col
