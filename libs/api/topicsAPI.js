@@ -32,6 +32,14 @@ class TopicsAPI {
             this.config,
         );
     }
+
+    editTopicNotes(subjectId, topicId, newNotes) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/notes`,
+            newNotes,
+            this.config,
+        );
+    }
 }
 
 export default TopicsAPI;

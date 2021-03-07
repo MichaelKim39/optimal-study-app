@@ -5,9 +5,10 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { useGetMe } from '@/actions/user';
 import { getMotivationalQuote } from '@/actions/quotes';
 
+import '@/styles/main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
-import '@/styles/main.scss';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 library.add(faPlusCircle);
 

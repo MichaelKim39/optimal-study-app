@@ -20,3 +20,11 @@ export const deleteTopic = (subjectId, topicId) => {
 export const useDeleteTopic = () => {
     return useReqStatus(deleteTopic);
 };
+
+// EDIT TOPIC
+export const editTopicNotes = (subjectId, topicId, newNotes) => {
+    return axios.patch(`/api/v1/topics/${topicId}/notes`, {
+        subjectId,
+        newNotes,
+    });
+};

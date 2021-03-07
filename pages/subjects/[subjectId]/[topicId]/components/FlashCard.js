@@ -41,9 +41,8 @@ const FlashCard = ({ card }) => {
     };
 
     return (
-        <>
+        <div id={card._id}>
             <div
-                id={card._id}
                 className={`${styles.flashCard} ${
                     flipping && styles.flashCardFlipping
                 }`}
@@ -62,7 +61,7 @@ const FlashCard = ({ card }) => {
                 </div>
             </div>
             <CardFooter />
-        </>
+        </div>
     );
 };
 
