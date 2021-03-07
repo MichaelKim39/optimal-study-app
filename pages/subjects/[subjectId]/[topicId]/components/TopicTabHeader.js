@@ -12,10 +12,9 @@ const TopicTabHeader = ({ currentTab, changeTabs }) => {
         <Nav tabs fill pills className={styles.tabHeader}>
             <NavItem>
                 <NavLink
-                    className={[
-                        { active: isTabOpen(1) },
-                        isTabOpen(1) ? styles.tabActive : styles.tabInactive,
-                    ]}
+                    className={`${
+                        isTabOpen(1) ? styles.tabActive : styles.tabInactive
+                    }`}
                     onClick={() => {
                         changeTabs(1);
                     }}
@@ -25,10 +24,9 @@ const TopicTabHeader = ({ currentTab, changeTabs }) => {
             </NavItem>
             <NavItem>
                 <NavLink
-                    className={[
-                        { active: isTabOpen(2) },
-                        isTabOpen(2) ? styles.tabActive : styles.tabInactive,
-                    ]}
+                    className={`${
+                        isTabOpen(2) ? styles.tabActive : styles.tabInactive
+                    }`}
                     onClick={() => {
                         changeTabs(2);
                     }}

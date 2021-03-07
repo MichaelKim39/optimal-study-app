@@ -7,5 +7,5 @@ export const getMotivationalQuote = async () => {
         'http://quotes.rest/qod.json?category=inspire',
     );
     const quoteObj = await response.json();
-    return quoteObj;
+    return quoteObj.contents.quotes[0].quote;
 };

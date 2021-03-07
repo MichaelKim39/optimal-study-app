@@ -28,7 +28,6 @@ const EditSubjectPage = ({ userInfo, userLoading }) => {
 
     const handleBackNavigate = () => {
         if (!!editedSubject) {
-            log('THINGS ARE HAPPENING');
             router.push(`/subjects/${router.query.subjectId}`);
         }
     };

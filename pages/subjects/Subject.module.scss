@@ -1,8 +1,6 @@
 // TOPICS PAGE
 .topicsContainer {
-    justify-content: center;
-    align-items: center;
-    padding: 20px 80px;
+    padding: 20px 0px;
 }
 .addTopicButton {
     &:hover {
@@ -12,14 +10,14 @@
     }
 }
 
-// SUBJECTS CONTAINER
+// TOPIC CONTAINER
 .topicContainer {
     // background-image: linear-gradient(45deg, #949494 0%, #727272 100%);
     background: slategray;
     border: solid 2px rgb(167, 186, 206);
     border-radius: 15px;
     margin-bottom: 50px;
-    height: 450px;
+    height: 490px;
     overflow: hidden;
     justify-content: center;
 
@@ -27,6 +25,12 @@
         cursor: pointer;
         transform: translateY(-5px);
     }
+}
+.topicHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .topicTitle {
     color: white;
@@ -36,11 +40,14 @@
     font-weight: 700;
     font-size: 20px;
 }
+.deleteButton {
+    height: 40px;
+}
 .topicDescription {
     color: white;
     padding-top: 15px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: bold;
     line-height: 1.3;
 }
 

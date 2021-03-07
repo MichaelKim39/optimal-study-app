@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 
 import { log } from '@/utils/logger';
 import SubjectsAPI from '@/libs/api/SubjectsAPI';
+import { checkPermission } from '@/actions/user';
+import { useDeleteTopic } from '@/actions/topics';
 
 import styles from '../Subject.module.scss';
 
@@ -15,16 +18,39 @@ import PageLayout from '@/components/layouts/PageLayout';
 
 import TopicContainer from '../components/TopicContainer';
 
-const Subject = ({ subject }) => {
+const Subject = ({ userInfo, subject }) => {
     const router = useRouter();
-    const topics = subject?.data?.topics;
+    const [handleDeleteTopic, deleteTopicStatus] = useDeleteTopic();
+
+    const initialTopics = subject?.data?.topics;
+    const [topics, setTopics] = useState(initialTopics);
 
     const handlePressTopic = (topic) => {
-        log('Topic Press');
         router.push(
             '/subjects/[subjectId]/[topicId]',
             `/subjects/${subject.data._id}/${topic._id}`,
         );
+    };
+
+    const handlePressDelete = async (event, topicId) => {
+        event.stopPropagation();
+        if (
+            confirm(
+                'Are you sure? If you remove this topic, you cannot recover it!',
+            )
+        ) {
+            await handleDeleteTopic(subject.data._id, topicId);
+            setTopics(topics.filter((topic) => topic._id !== topicId));
+            toast.success('✅ Topic Succesfully Deleted!', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
     };
 
     const AddTopicButton = () => {
@@ -52,7 +78,16 @@ const Subject = ({ subject }) => {
                             md='4'
                             onClick={() => handlePressTopic(topic)}
                         >
-                            <TopicContainer topic={topic} />
+                            <TopicContainer
+                                topic={topic}
+                                showDeleteButton={
+                                    userInfo &&
+                                    checkPermission(userInfo, 'admin')
+                                }
+                                onPressDelete={(event) =>
+                                    handlePressDelete(event, topic._id)
+                                }
+                            />
                         </Col>
                     ))}
                 </Row>

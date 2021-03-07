@@ -6,21 +6,37 @@ import {
     CardBody,
     CardTitle,
     CardHeader,
-    ListGroup,
-    ListGroupItem,
+    Button,
+    Row,
+    Col,
 } from 'reactstrap';
 
 import styles from '../Subject.module.scss';
 
 import { log } from '@/utils/logger';
 
-const TopicContainer = ({ topic }) => {
+const TopicContainer = ({ topic, showDeleteButton = false, onPressDelete }) => {
+    const DeleteButton = () => {
+        return (
+            <Button
+                color='danger'
+                className={styles.deleteButton}
+                onClick={(event) => onPressDelete(event)}
+            >
+                Delete
+            </Button>
+        );
+    };
+
     return (
         <Card className={styles.topicContainer}>
             <CardHeader>
-                <CardTitle className={styles.topicTitle}>
-                    {topic.title}
-                </CardTitle>
+                <div className={styles.topicHeader}>
+                    <CardTitle className={styles.topicTitle}>
+                        {topic.title}
+                    </CardTitle>
+                    {showDeleteButton && <DeleteButton />}
+                </div>
             </CardHeader>
             <CardBody>
                 {topic.image && (

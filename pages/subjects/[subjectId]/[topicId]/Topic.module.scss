@@ -2,22 +2,20 @@
 .root {
     padding-bottom: 50px;
 }
-.topicDescription {
-    color: white;
-    padding: 10px 20px;
-}
-.topicHeader {
-    width: 20px;
+.topRowContainer {
+    display: flex;
 }
 .topicImage {
     border: 2px solid lightgray;
     border-radius: 25px;
     overflow: hidden;
     margin-bottom: 50px;
-    width: 45%;
+    height: 100%;
+    flex: 1;
 }
 .quote {
-    font-size: 40px;
+    display: flex;
+    font-size: 35px;
     color: white;
     font-weight: bold;
     font-style: italic;
@@ -26,9 +24,17 @@
     margin-bottom: 50px;
     margin-left: 20px;
     padding: 15px;
-    width: 45%;
     text-align: center;
     align-items: center;
+    justify-content: center;
+    flex: 2;
+}
+.topicDescription {
+    color: white;
+    padding: 10px 20px;
+}
+.topicHeader {
+    width: 20px;
 }
 
 // TABS
@@ -47,4 +53,45 @@
         background-color: lightgray;
         font-weight: bold;
     }
+}
+
+// CARDS
+.flashCard {
+    display: flex;
+    height: 50vh;
+    width: 100%;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+    margin-top: 30px;
+    text-align: center;
+
+    &Flipping {
+        transform: rotateY(-180deg);
+    }
+    &Front,
+    &Back {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border: 1px solid black;
+        border-radius: 30px;
+        padding: 20px;
+    }
+    &Front {
+        transform: rotateY(0deg);
+        background-color: orange;
+    }
+    &Back {
+        transform: rotateY(180deg);
+        background-color: lightblue;
+    }
+}
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
 }
