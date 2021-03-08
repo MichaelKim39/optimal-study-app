@@ -10,8 +10,8 @@ import {
     ListGroupItem,
     Button,
     Row,
-    Col,
 } from 'reactstrap';
+import { useRouter } from 'next/router';
 
 import styles from '../Subjects.module.scss';
 
@@ -21,8 +21,14 @@ const SubjectContainer = ({
     subject,
     onPressEdit,
     onPressDelete,
-    showUtilButtons,
+    showUtilButtons = false,
+    containerStyle,
 }) => {
+    const router = useRouter();
+    const handleOpenSubject = (subjectId) => {
+        router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
+    };
+
     const TopicsList = () => {
         return (
             <ListGroup>
@@ -34,7 +40,10 @@ const SubjectContainer = ({
     };
 
     return (
-        <Card className={styles.subjectContainer}>
+        <Card
+            className={`${styles.subjectContainer} ${containerStyle}`}
+            onClick={() => handleOpenSubject(subject._id)}
+        >
             <CardHeader>
                 <Row className={styles.headerRow}>
                     <CardTitle className={styles.subjectTitle}>

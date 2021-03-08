@@ -29,6 +29,14 @@ export const useDeleteSubject = () => {
     return useReqStatus(deleteSubject);
 };
 
+// SEARCH SUBJECT
+export const searchSubjects = (query) => {
+    return axios.get(`/api/v1/search/${query}`);
+};
+export const useSearchSubjects = () => {
+    return useReqStatus(searchSubjects);
+};
+
 // GET SUBJECT
 export const useGetSubject = (subjectId) => {
     const { data, error } = useSWR(

@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    FormText,
-    CustomInput,
-} from 'reactstrap';
+import React from 'react';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 
 import styles from '../Subjects.module.scss';

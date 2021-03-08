@@ -26,10 +26,6 @@ const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
     } = deleteSubjectStatus;
     const [subjects, setSubjects] = useState(initialSubjects);
 
-    const handleOpenSubject = (subjectId) => {
-        router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
-    };
-
     const handlePressEdit = (event, subjectId) => {
         event.stopPropagation();
         router.push(
@@ -65,11 +61,7 @@ const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
             >
                 <Row className={styles.subjectsContainer}>
                     {subjects?.map((subject) => (
-                        <Col
-                            key={subject._id}
-                            md='3'
-                            onClick={() => handleOpenSubject(subject._id)}
-                        >
+                        <Col key={subject._id} md='3'>
                             <SubjectContainer
                                 subject={subject}
                                 showUtilButtons={

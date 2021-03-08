@@ -37,6 +37,13 @@ class SubjectsAPI {
     deleteSubject(subjectId) {
         return axios.delete(`${this.subjectsApiUrl}/${subjectId}`, this.config);
     }
+
+    searchSubjects(query) {
+        return axios.get(
+            `${process.env.API_BASE_URL}/search/${query}`,
+            this.config,
+        );
+    }
 }
 
 export default SubjectsAPI;

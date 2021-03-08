@@ -19,7 +19,7 @@ import AddButton from '@/components/global/AddButton';
 
 import TopicContainer from '../components/TopicContainer';
 
-const Subject = ({ userInfo, subject }) => {
+const Subject = ({ userInfo, userLoading, subject }) => {
     const router = useRouter();
     const [handleDeleteTopic, deleteTopicStatus] = useDeleteTopic();
 
@@ -55,7 +55,7 @@ const Subject = ({ userInfo, subject }) => {
     };
 
     return (
-        <DefaultLayout>
+        <DefaultLayout userInfo={userInfo} userLoading={userLoading}>
             <PageLayout
                 pageTitle={subject.data.title}
                 titleAccessory={<AddTopicButton />}

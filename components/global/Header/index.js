@@ -41,6 +41,7 @@ const Header = ({ userInfo, userLoading, isTransparent = false }) => {
                         <PageLink path='/about' label='About' />
                         <PageLink path='/home' label='Home' />
                         <PageLink path='/subjects' label='Subjects' />
+                        <PageLink path='/search' label='Search' />
                     </Nav>
                     <Nav navbar>
                         {!!userInfo ? (

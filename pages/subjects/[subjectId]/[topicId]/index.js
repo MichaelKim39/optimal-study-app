@@ -13,7 +13,7 @@ import TopicTabHeader from './components/TopicTabHeader';
 import NotesTab from './components/NotesTab';
 import CardsTab from './components/CardsTab';
 
-const Topic = ({ topic }) => {
+const Topic = ({ userInfo, userLoading, topic }) => {
     const [currentTab, setCurrentTab] = useState(1);
     const [quote, setQuote] = useState('');
 
@@ -29,7 +29,11 @@ const Topic = ({ topic }) => {
     }, []);
 
     return (
-        <DefaultLayout className={styles.root}>
+        <DefaultLayout
+            userInfo={userInfo}
+            userLoading={userLoading}
+            className={styles.root}
+        >
             <PageLayout
                 pageTitle={topic.title}
                 pageSubTitle={topic.description}

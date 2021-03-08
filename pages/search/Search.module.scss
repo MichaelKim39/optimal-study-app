@@ -1,0 +1,21 @@
+.search {
+    &Container {
+        width: 30%;
+        border: 1px solid darkslateblue;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    &Button {
+        width: 70px;
+        background-color: darkslateblue;
+    }
+    &Input {
+    }
+}
+.searchResult {
+    width: 50%;
+    margin: 50px 0px;
+
+    &List {
+    }
+}
