@@ -57,10 +57,18 @@ class TopicsAPI {
         );
     }
 
-    getTopicCard(subjectId, topicId, cardId) {
+    getTopicCard(subjectId, topicId, cardId, reqMethod) {
         return axios.put(
             `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,
-            { cardId },
+            { cardId, reqMethod },
+            this.config,
+        );
+    }
+
+    deleteTopicCard(subjectId, topicId, cardId, reqMethod) {
+        return axios.put(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,
+            { cardId, reqMethod },
             this.config,
         );
     }

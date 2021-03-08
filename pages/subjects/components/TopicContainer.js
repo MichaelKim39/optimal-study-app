@@ -40,7 +40,9 @@ const TopicContainer = ({ topic, showDeleteButton = false, onPressDelete }) => {
             </CardHeader>
             <CardBody>
                 {topic.image && (
-                    <CardImg src={topic.image} width='100%' height={300} />
+                    <div className={styles.topicImageContainer}>
+                        <CardImg src={topic.image} />
+                    </div>
                 )}
                 <CardText className={styles.topicDescription}>
                     {topic.description}

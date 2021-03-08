@@ -4,6 +4,10 @@ import { TabPane } from 'reactstrap';
 
 import styles from '../Topic.module.scss';
 
+import { useDeleteCard } from '@/actions/topics';
+import { openErrorToast, openSuccessToast } from '@/utils/popups';
+import { log } from '@/utils/logger';
+
 import FlashCard from './FlashCard';
 import CardFooter from './CardFooter';
 import AddButton from '@/components/global/AddButton';
@@ -11,9 +15,13 @@ import AddButton from '@/components/global/AddButton';
 const CardsTab = ({ cards: initialCards }) => {
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [cards, setCards] = useState(initialCards);
+    const [handleDeleteCard, deleteCardStatus] = useDeleteCard();
+
     const router = useRouter();
+    const { subjectId, topicId } = router.query;
+    const numCards = cards?.length || 0;
     const isFirst = currentCardIndex === 0;
-    const isLast = currentCardIndex === cards.length - 1;
+    const isLast = currentCardIndex === numCards - 1;
 
     const handlePressPrev = () => {
         if (!isFirst) {
@@ -32,11 +40,20 @@ const CardsTab = ({ cards: initialCards }) => {
     };
 
     const handleDeletePress = () => {
-        if (isLast) {
-            setCurrentCardIndex(currentCardIndex - 1);
+        try {
+            const cardId = cards[currentCardIndex]._id;
+            handleDeleteCard(subjectId, topicId, cardId);
+
+            if (isLast) {
+                setCurrentCardIndex(currentCardIndex - 1);
+            }
+            setCards(cards.filter((card) => card !== cards[currentCardIndex]));
+
+            openSuccessToast('Successfully deleted card');
+        } catch (error) {
+            openErrorToast('Error while deleting card');
+            log('ERROR WHILE DELETING CARD', error.response);
         }
-        setCards(cards.filter((card) => card !== cards[currentCardIndex]));
-        // DELETE API (CLIENT & SERVER)
     };
 
     return (
@@ -50,9 +67,11 @@ const CardsTab = ({ cards: initialCards }) => {
                             onClick={handlePressAddCard}
                         />
                     </div>
-                    <h3>{`${currentCardIndex + 1} / ${cards.length}`}</h3>
+                    {numCards > 0 && (
+                        <h3>{`${currentCardIndex + 1} / ${numCards}`}</h3>
+                    )}
                 </div>
-                {cards.length > 0 && (
+                {numCards > 0 && (
                     <>
                         <FlashCard
                             card={cards[currentCardIndex]}

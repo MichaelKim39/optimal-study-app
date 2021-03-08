@@ -30,7 +30,6 @@ export const useReqStatus = (
         error: null,
     };
     const [reqStatus, setReqStatus] = useState(INIT_STATUS);
-
     const handleRequest = async (...inputData) => {
         setReqStatus(INIT_STATUS);
         try {

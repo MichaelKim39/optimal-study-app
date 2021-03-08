@@ -61,7 +61,12 @@ const SubjectContainer = ({
                 </Row>
             </CardHeader>
             <CardBody>
-                <CardImg src={subject.image} width='100%' height={300} />
+                <div className={styles.subjectImage}>
+                    <CardImg
+                        src={subject.image}
+                        // width='100%'
+                    />
+                </div>
                 <CardText className={styles.subjectDescription}>
                     {subject.description}
                 </CardText>

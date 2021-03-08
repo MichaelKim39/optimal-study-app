@@ -44,11 +44,20 @@ const handleEditCard = async (req, res) => {
     }
 };
 
+const handleGetOrDeleteCard = async (req, res) => {
+    const { reqMethod } = req.body;
+    if (reqMethod.method === 'get') {
+        handleGetCard(req, res);
+    } else if (reqMethod.method === 'delete') {
+        handleDeleteCard(req, res);
+    }
+};
+
 const handleGetCard = async (req, res) => {
     try {
         const {
             query: { topicId },
-            body: { subjectId, cardId },
+            body: { subjectId, cardId, reqMethod },
         } = req;
 
         const { accessToken: jwt } = await auth0.getSession(req);
@@ -56,10 +65,32 @@ const handleGetCard = async (req, res) => {
             subjectId,
             topicId,
             cardId,
+            reqMethod,
         );
         return res.json(response.data);
     } catch (error) {
         log('ERROR WHILE GETTING TOPIC CARD: ', error.response.data);
+        return res.status(error.status || 422).json(error.response.data);
+    }
+};
+
+const handleDeleteCard = async (req, res) => {
+    try {
+        const {
+            query: { topicId },
+            body: { subjectId, cardId, reqMethod },
+        } = req;
+
+        const { accessToken: jwt } = await auth0.getSession(req);
+        const response = await new TopicsAPI(jwt).deleteTopicCard(
+            subjectId,
+            topicId,
+            cardId,
+            reqMethod,
+        );
+        return res.json(response.data);
+    } catch (error) {
+        log('ERROR WHILE DELETING TOPIC CARD: ', error.response.data);
         return res.status(error.status || 422).json(error.response.data);
     }
 };
@@ -73,7 +104,7 @@ export default async function handleTopicRequest(req, res) {
             await handleEditCard(req, res);
             break;
         case 'PUT':
-            await handleGetCard(req, res);
+            await handleGetOrDeleteCard(req, res);
             break;
         default:
             log('ERROR - REQUEST METHOD NOT RECOGNISED!');

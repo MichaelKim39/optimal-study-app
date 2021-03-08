@@ -40,7 +40,10 @@ const FlashCard = ({ card, onDeletePress }) => {
                     className={styles.flashCardBack}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <CardUtilButtons onEditPress={handleEditPress} />
+                    <CardUtilButtons
+                        onEditPress={handleEditPress}
+                        onDeletePress={onDeletePress}
+                    />
                     <div className={styles.flashCardTextContainer}>
                         <p className={styles.flashCardContentText}>
                             {card.answer}

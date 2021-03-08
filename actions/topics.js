@@ -55,9 +55,11 @@ export const useEditCard = () => {
 // GET CARD
 // PUT request used because http implementation means we cannot send GET request with bodies
 export const getCard = (subjectId, topicId, cardId) => {
+    const reqMethod = { method: 'get' };
     return axios.put(`/api/v1/topics/${topicId}/cards`, {
         subjectId,
         cardId,
+        reqMethod,
     });
 };
 export const useGetCard = () => {
@@ -66,7 +68,12 @@ export const useGetCard = () => {
 
 // DELETE CARD
 export const deleteCard = (subjectId, topicId, cardId) => {
-    return axios.delete(`/api/v1/topics/${topicId}`, { subjectId, cardId });
+    const reqMethod = { method: 'delete' };
+    return axios.put(`/api/v1/topics/${topicId}/cards`, {
+        subjectId,
+        cardId,
+        reqMethod,
+    });
 };
 export const useDeleteCard = () => {
     return useReqStatus(deleteCard);

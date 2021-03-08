@@ -36,7 +36,7 @@ const Topic = ({ topic }) => {
             >
                 <div className={styles.topRowContainer}>
                     <div className={styles.topicImage}>
-                        <img src={topic.image} width='100%' height={300} />
+                        <img src={topic.image} width='100%' />
                     </div>
                     <blockquote className={styles.quote}>{quote}</blockquote>
                 </div>
