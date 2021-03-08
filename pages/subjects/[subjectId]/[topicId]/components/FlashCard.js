@@ -5,7 +5,7 @@ import styles from '../Topic.module.scss';
 
 import CardUtilButtons from './CardUtilButtons';
 
-const FlashCard = ({ card }) => {
+const FlashCard = ({ card, onDeletePress }) => {
     const router = useRouter();
     const { subjectId, topicId } = router.query;
     const [flipping, setFlipping] = useState(false);
@@ -26,7 +26,10 @@ const FlashCard = ({ card }) => {
                     className={styles.flashCardFront}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <CardUtilButtons onEditPress={handleEditPress} />
+                    <CardUtilButtons
+                        onEditPress={handleEditPress}
+                        onDeletePress={onDeletePress}
+                    />
                     <div className={styles.flashCardTextContainer}>
                         <p className={styles.flashCardContentText}>
                             {card.question}

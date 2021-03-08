@@ -5,6 +5,11 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '../Topic.module.scss';
 
 const CardUtilButtons = ({ onEditPress, onDeletePress }) => {
+    const _onDeletePress = (event) => {
+        event.stopPropagation();
+        onDeletePress();
+    };
+
     return (
         <div className={styles.cardUtilButtonContainer}>
             <FontAwesomeIcon
@@ -16,7 +21,7 @@ const CardUtilButtons = ({ onEditPress, onDeletePress }) => {
             <FontAwesomeIcon
                 icon={faTrash}
                 size='2x'
-                onClick={onDeletePress}
+                onClick={_onDeletePress}
                 className={styles.activeCardIcon}
             />
         </div>

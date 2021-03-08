@@ -63,3 +63,11 @@ export const getCard = (subjectId, topicId, cardId) => {
 export const useGetCard = () => {
     return useReqStatus(getCard);
 };
+
+// DELETE CARD
+export const deleteCard = (subjectId, topicId, cardId) => {
+    return axios.delete(`/api/v1/topics/${topicId}`, { subjectId, cardId });
+};
+export const useDeleteCard = () => {
+    return useReqStatus(deleteCard);
+};
