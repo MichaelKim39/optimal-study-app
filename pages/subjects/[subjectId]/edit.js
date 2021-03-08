@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import styles from '../Subject.module.scss';
 
 import { log } from '@/utils/logger';
+import { openErrorToast } from '@/utils/popups';
 import { useGetSubject, useEditSubject } from '@/actions/subjects';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
@@ -36,26 +37,15 @@ const EditSubjectPage = ({ userInfo, userLoading }) => {
         // alert(JSON.stringify(newSubject));
         try {
             await handleEditSubject(router.query.subjectId, newSubject);
-            toast.success(
-                '✅ Subject Succesfully Updated! (Click to return to subject)',
-                {
-                    position: 'top-right',
-                    autoClose: false,
-                    closeOnClick: true,
-                    onClose: () => handleBackNavigate(),
-                    draggable: true,
-                },
-            );
-        } catch {
-            toast.error('❌ Error while editing subject!', {
+            toast.success('✅ Subject Succesfully Updated!', {
                 position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
+                autoClose: false,
                 closeOnClick: true,
-                pauseOnHover: true,
+                onClose: () => handleBackNavigate(),
                 draggable: true,
-                progress: undefined,
             });
+        } catch {
+            openErrorToast('Error while editing subject!');
         }
     };
 

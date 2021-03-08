@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Row, Col } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
 
 import { log } from '@/utils/logger';
+import { openSuccessToast } from '@/utils/popups';
 import SubjectsAPI from '@/libs/api/SubjectsAPI';
 import { checkPermission } from '@/actions/user';
 import { useDeleteTopic } from '@/actions/topics';
@@ -15,6 +15,7 @@ import Warning from '@/components/global/Warning';
 import LoadingIndicator from '@/components/global/LoadingIndicator';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
+import AddButton from '@/components/global/AddButton';
 
 import TopicContainer from '../components/TopicContainer';
 
@@ -41,26 +42,14 @@ const Subject = ({ userInfo, subject }) => {
         ) {
             await handleDeleteTopic(subject.data._id, topicId);
             setTopics(topics.filter((topic) => topic._id !== topicId));
-            toast.success('✅ Topic Succesfully Deleted!', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            openSuccessToast('Topic Succesfully Deleted!');
         }
     };
 
     const AddTopicButton = () => {
         return (
-            <FontAwesomeIcon
-                icon='plus-circle'
-                color='white'
-                size='2x'
+            <AddButton
                 onClick={() => router.push(`/subjects/${subject.data._id}/add`)}
-                className={styles.addTopicButton}
             />
         );
     };

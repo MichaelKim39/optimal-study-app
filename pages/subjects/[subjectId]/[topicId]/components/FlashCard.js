@@ -1,47 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faArrowAltCircleLeft,
-    faArrowAltCircleRight,
-    faStar,
-} from '@fortawesome/free-solid-svg-icons';
-import Rating from 'react-rating';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import styles from '../Topic.module.scss';
 
-const FlashCard = ({ card }) => {
-    const [flipping, setFlipping] = useState(false);
-    const [difficultyRating, setDifficultyRating] = useState(0);
+import CardUtilButtons from './CardUtilButtons';
 
-    const CardFooter = () => {
-        return (
-            <div className={styles.cardFooter}>
-                <FontAwesomeIcon icon={faArrowAltCircleLeft} size='3x' />
-                <Rating
-                    emptySymbol={
-                        <FontAwesomeIcon
-                            icon={faStar}
-                            size='3x'
-                            color='lightgray'
-                        />
-                    }
-                    fullSymbol={
-                        <FontAwesomeIcon
-                            icon={faStar}
-                            size='3x'
-                            color='orange'
-                        />
-                    }
-                    onChange={setDifficultyRating}
-                    initialRating={difficultyRating}
-                />
-                <FontAwesomeIcon icon={faArrowAltCircleRight} size='3x' />
-            </div>
-        );
+const FlashCard = ({ card }) => {
+    const router = useRouter();
+    const { subjectId, topicId } = router.query;
+    const [flipping, setFlipping] = useState(false);
+
+    const handleEditPress = (event) => {
+        event.stopPropagation();
+        router.push(`/subjects/${subjectId}/${topicId}/${card._id}`);
     };
 
     return (
-        <div id={card._id}>
+        <div key={card._id} className={styles.flashCardContainer}>
             <div
                 className={`${styles.flashCard} ${
                     flipping && styles.flashCardFlipping
@@ -51,16 +26,25 @@ const FlashCard = ({ card }) => {
                     className={styles.flashCardFront}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <h3>{card.question}</h3>
+                    <CardUtilButtons onEditPress={handleEditPress} />
+                    <div className={styles.flashCardTextContainer}>
+                        <p className={styles.flashCardContentText}>
+                            {card.question}
+                        </p>
+                    </div>
                 </div>
                 <div
                     className={styles.flashCardBack}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <h3>{card.answer}</h3>
+                    <CardUtilButtons onEditPress={handleEditPress} />
+                    <div className={styles.flashCardTextContainer}>
+                        <p className={styles.flashCardContentText}>
+                            {card.answer}
+                        </p>
+                    </div>
                 </div>
             </div>
-            <CardFooter />
         </div>
     );
 };

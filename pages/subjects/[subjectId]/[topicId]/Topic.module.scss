@@ -60,10 +60,26 @@
 }
 
 // CARDS
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &Left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+.flashCardContainer {
+    display: flex;
+    justify-content: center;
+}
 .flashCard {
     display: flex;
     height: 50vh;
-    width: 100%;
+    width: 90%;
     transition: 1s;
     transform-style: preserve-3d;
     position: relative;
@@ -81,21 +97,72 @@
         left: 0;
         bottom: 0;
         right: 0;
-        border: 1px solid black;
         border-radius: 30px;
         padding: 20px;
     }
     &Front {
         transform: rotateY(0deg);
+        border: 3px solid rgb(253, 145, 30);
         background-color: orange;
     }
     &Back {
         transform: rotateY(180deg);
+        border: 3px solid rgb(146, 227, 253);
         background-color: lightblue;
+    }
+    &TextContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding-bottom: 90px;
+    }
+    &ContentText {
+        font-size: 30px;
+        white-space: pre-wrap;
     }
 }
 .cardFooter {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 50px;
+}
+.activeCardIcon {
+    &.active {
+        color: #e97a13;
+    }
+    &:hover,
+    &:focus {
+        color: #db8019;
+    }
+    margin: 5px;
+}
+
+// ADD CARD
+.cardInput {
+    width: 50%;
+    min-height: 100px;
+    border-radius: 10px;
+    padding: 15px;
+
+    &Label {
+        color: white;
+        width: 50%;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+}
+.cardFormGroup {
+    display: flex;
+    flex-direction: column;
+}
+.addCardButton {
+    border: 2px solid gray;
+}
+
+// CARD UTIL BUTTONS
+.cardUtilButtonContainer {
+    display: flex;
+    flex-direction: row;
 }

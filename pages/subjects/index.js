@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Button } from 'reactstrap';
 import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
+import { openSuccessToast } from '@/utils/popups';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './Subjects.module.scss';
@@ -14,6 +14,7 @@ import { useDeleteSubject } from '@/actions/subjects';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
+import AddButton from '@/components/global/AddButton';
 import SubjectContainer from './components/SubjectContainer';
 
 const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
@@ -48,28 +49,12 @@ const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
             setSubjects(
                 subjects.filter((subject) => subject._id !== subjectId),
             );
-            toast.success('✅ Subject Succesfully Deleted!', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            openSuccessToast('Subject Succesfully Deleted!');
         }
     };
 
     const AddSubjectButton = () => {
-        return (
-            <FontAwesomeIcon
-                icon='plus-circle'
-                color='white'
-                size='2x'
-                onClick={() => router.push('/subjects/add')}
-                className={styles.addSubjectButton}
-            />
-        );
+        return <AddButton onClick={() => router.push('/subjects/add')} />;
     };
 
     return (

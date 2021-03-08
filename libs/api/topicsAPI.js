@@ -40,6 +40,30 @@ class TopicsAPI {
             this.config,
         );
     }
+
+    addTopicCard(subjectId, topicId, newCard) {
+        return axios.post(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,
+            newCard,
+            this.config,
+        );
+    }
+
+    editTopicCard(subjectId, topicId, cardId, newCard) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,
+            { cardId, newCard },
+            this.config,
+        );
+    }
+
+    getTopicCard(subjectId, topicId, cardId) {
+        return axios.put(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,
+            { cardId },
+            this.config,
+        );
+    }
 }
 
 export default TopicsAPI;

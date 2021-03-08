@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { TabPane, Button } from 'reactstrap';
 import ReactMde from 'react-mde';
 import ReactMarkdown from 'react-markdown';
+import { openSuccessToast, openErrorToast } from '@/utils/popups';
 
 import styles from '../Topic.module.scss';
 
@@ -15,11 +16,17 @@ const NotesTab = ({ notes }) => {
     const [markdownTab, setMarkdownTab] = useState('write');
 
     const handleSaveNotes = async () => {
-        const response = await editTopicNotes(
-            router.query.subjectId,
-            router.query.topicId,
-            { markdown },
-        );
+        try {
+            const response = await editTopicNotes(
+                router.query.subjectId,
+                router.query.topicId,
+                { markdown },
+            );
+
+            openSuccessToast('Notes Successfully Saved!');
+        } catch (error) {
+            openErrorToast('Error while saving notes...');
+        }
     };
 
     return (
