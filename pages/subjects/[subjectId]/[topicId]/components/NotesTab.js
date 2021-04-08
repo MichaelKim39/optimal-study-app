@@ -14,6 +14,7 @@ const NotesTab = ({ notes }) => {
     const router = useRouter();
     const [markdown, setMarkdown] = useState(notes);
     const [markdownTab, setMarkdownTab] = useState('write');
+    const [unsaved, setUnsaved] = useState(false);
 
     const handleSaveNotes = async () => {
         try {
@@ -22,7 +23,7 @@ const NotesTab = ({ notes }) => {
                 router.query.topicId,
                 { markdown },
             );
-
+            setUnsaved(false);
             openSuccessToast('Notes Successfully Saved!');
         } catch (error) {
             openErrorToast('Error while saving notes...');
@@ -33,10 +34,18 @@ const NotesTab = ({ notes }) => {
         <TabPane tabId={1}>
             <div className={styles.tabContainer}>
                 <h1>Notes</h1>
+                <h5>
+                    Tip: Ensure notes are clear and concise. Focus on using
+                    flashcards for active recall for optimal study efficiency!
+                </h5>
+                <br />
                 <div className={styles.markdownContainer}>
                     <ReactMde
                         value={markdown}
-                        onChange={setMarkdown}
+                        onChange={(md) => {
+                            setMarkdown(md);
+                            setUnsaved(true);
+                        }}
                         selectedTab={markdownTab}
                         onTabChange={setMarkdownTab}
                         minEditorHeight={500}
@@ -48,7 +57,7 @@ const NotesTab = ({ notes }) => {
                     />
                 </div>
                 <Button
-                    color='primary'
+                    color={unsaved ? 'danger' : 'primary'}
                     onClick={handleSaveNotes}
                     className='mt-3'
                 >

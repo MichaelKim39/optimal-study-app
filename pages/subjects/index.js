@@ -3,12 +3,15 @@ import { Row, Col, Button } from 'reactstrap';
 import { useRouter } from 'next/router';
 import { openSuccessToast } from '@/utils/popups';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 
 import styles from './Subjects.module.scss';
 
 import { log } from '@/utils/logger';
 import SubjectsAPI from '@/libs/api/subjectsAPI';
+import { getSubjects } from '@/actions/subjects';
 import withAuthCheck from '@/hoc/withAuthCheck';
+import auth0 from '@/utils/auth0';
 import { checkPermission } from '@/actions/user';
 import { useDeleteSubject } from '@/actions/subjects';
 
@@ -83,13 +86,24 @@ const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
     );
 };
 
-export async function getStaticProps() {
-    const subjectsJSON = await new SubjectsAPI().getSubjects();
+export const getServerSideProps = async ({ req, res }) => {
+    const session = await auth0.getSession(req);
+
+    if (!session || !session.user) {
+        res.writeHead(302, {
+            Location: '/api/v1/signin',
+        });
+        res.end();
+        return;
+    }
+
+    const { accessToken: jwt } = session;
+    const subjectsJSON = await new SubjectsAPI(jwt).getSubjects();
     const subjects = subjectsJSON.data;
     return {
         props: { subjects },
     };
-}
+};
 
 // TODO: Figure out why withAuthCheck is failing here
 export default Subjects;

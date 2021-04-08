@@ -15,7 +15,7 @@ class SubjectsAPI {
     }
 
     getSubjects() {
-        return axios.get(this.subjectsApiUrl);
+        return axios.get(this.subjectsApiUrl, this.config);
     }
 
     getSubject(subjectId) {

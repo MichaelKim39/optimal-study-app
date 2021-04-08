@@ -21,7 +21,9 @@
     border: solid 2px rgb(167, 186, 206);
     border-radius: 15px;
     margin-bottom: 50px;
-    height: 650px;
+    min-height: 600px;
+    max-width: 350px;
+    min-width: 300px;
     overflow: hidden;
 
     &:hover {
