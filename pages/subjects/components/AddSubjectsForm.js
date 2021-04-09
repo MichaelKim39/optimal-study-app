@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {
+    CustomInput,
+    Button,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Row,
+    Col,
+} from 'reactstrap';
 import { useForm } from 'react-hook-form';
 
 import styles from '../Subjects.module.scss';
@@ -42,21 +51,18 @@ const AddSubjectsForm = ({ onSubmitSubject, prefillData }) => {
                     className={styles.addSubjectsFormInput}
                 />
             </FormGroup>
-            {/* <FormGroup>
-                <Label for='subjectImage' className={styles.subjectInput}>
+            <FormGroup className={styles.addSubjectsFormGroup}>
+                <Label for='image' className={styles.subjectInput}>
                     Image
                 </Label>
-                <Input
-                    innerRef={register}
-                    type='file'
-                    name='image'
-                    id='subjectImage'
+                <CustomInput
                     className={styles.addSubjectsFormInput}
+                    type='file'
+                    id='image'
+                    name='image'
+                    label='Browse PC for an image to represent this subject!'
                 />
-                <FormText color='white'>
-                    Browse PC files for an image to represent this subject.
-                </FormText>
-            </FormGroup> */}
+            </FormGroup>
             <Button type='submit'>Submit</Button>
         </Form>
     );

@@ -66,6 +66,10 @@
 }
 
 // ADD SUBJECTS FORM
+.addSubjectsFormGroup {
+    display: flex;
+    flex-direction: column;
+}
 .addSubjectsFormInput {
     width: 50%;
 }
