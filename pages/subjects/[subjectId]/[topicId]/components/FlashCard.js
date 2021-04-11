@@ -5,7 +5,7 @@ import styles from '../Topic.module.scss';
 
 import CardUtilButtons from './CardUtilButtons';
 
-const FlashCard = ({ card, onDeletePress }) => {
+const FlashCard = ({ card, onDeletePress, showUtilButtons = true }) => {
     const router = useRouter();
     const { subjectId, topicId } = router.query;
     const [flipping, setFlipping] = useState(false);
@@ -26,11 +26,17 @@ const FlashCard = ({ card, onDeletePress }) => {
                     className={styles.flashCardFront}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <CardUtilButtons
-                        onEditPress={handleEditPress}
-                        onDeletePress={onDeletePress}
-                    />
-                    <div className={styles.flashCardTextContainer}>
+                    {showUtilButtons && (
+                        <CardUtilButtons
+                            onEditPress={handleEditPress}
+                            onDeletePress={onDeletePress}
+                        />
+                    )}
+                    <div
+                        className={`${styles.flashCardTextContainer} ${
+                            showUtilButtons && styles.flashCardBottomSpacing
+                        }`}
+                    >
                         <p className={styles.flashCardContentText}>
                             {card.question}
                         </p>
@@ -40,11 +46,17 @@ const FlashCard = ({ card, onDeletePress }) => {
                     className={styles.flashCardBack}
                     onClick={() => setFlipping(!flipping)}
                 >
-                    <CardUtilButtons
-                        onEditPress={handleEditPress}
-                        onDeletePress={onDeletePress}
-                    />
-                    <div className={styles.flashCardTextContainer}>
+                    {showUtilButtons && (
+                        <CardUtilButtons
+                            onEditPress={handleEditPress}
+                            onDeletePress={onDeletePress}
+                        />
+                    )}
+                    <div
+                        className={`${styles.flashCardTextContainer} ${
+                            showUtilButtons && styles.flashCardBottomSpacing
+                        }`}
+                    >
                         <p className={styles.flashCardContentText}>
                             {card.answer}
                         </p>

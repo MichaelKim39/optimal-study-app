@@ -57,6 +57,14 @@ class TopicsAPI {
         );
     }
 
+    updateCardBucket(subjectId, topicId, cardId, increment) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/card`,
+            { cardId, increment },
+            this.config,
+        );
+    }
+
     getTopicCard(subjectId, topicId, cardId, reqMethod) {
         return axios.put(
             `${this.subjectsApiUrl}/${subjectId}/${topicId}/cards`,

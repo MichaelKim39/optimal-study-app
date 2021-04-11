@@ -52,6 +52,18 @@ export const useEditCard = () => {
     return useReqStatus(editCard);
 };
 
+// UPDATE CARD BUCKET
+export const updateCardBucket = (subjectId, topicId, cardId, increment) => {
+    return axios.patch(`/api/v1/topics/${topicId}/card`, {
+        subjectId,
+        cardId,
+        increment,
+    });
+};
+export const useUpdateCardBucket = () => {
+    return useReqStatus(updateCardBucket);
+};
+
 // GET CARD
 // PUT request used because http implementation means we cannot send GET request with bodies
 export const getCard = (subjectId, topicId, cardId) => {

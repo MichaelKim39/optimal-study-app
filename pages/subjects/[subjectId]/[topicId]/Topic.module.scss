@@ -116,6 +116,8 @@
         justify-content: center;
         align-items: center;
         height: 100%;
+    }
+    &BottomSpacing {
         padding-bottom: 90px;
     }
     &ContentText {
@@ -166,4 +168,9 @@
 .cardUtilButtonContainer {
     display: flex;
     flex-direction: row;
+}
+
+// CARD MODAL
+.cardModal {
+    align-self: center;
 }

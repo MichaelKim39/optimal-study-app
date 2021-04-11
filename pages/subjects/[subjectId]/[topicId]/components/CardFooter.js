@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faArrowAltCircleLeft,
@@ -9,8 +10,14 @@ import Rating from 'react-rating';
 
 import styles from '../Topic.module.scss';
 
-const CardFooter = ({ onPressNext, onPressPrev, isFirst, isLast }) => {
-    const [difficultyRating, setDifficultyRating] = useState(0);
+const CardFooter = ({
+    onPressNext,
+    onPressPrev,
+    isFirst,
+    isLast,
+    onPressBegin,
+}) => {
+    // const [difficultyRating, setDifficultyRating] = useState(0);
 
     return (
         <div className={styles.cardFooter}>
@@ -21,7 +28,7 @@ const CardFooter = ({ onPressNext, onPressPrev, isFirst, isLast }) => {
                 color={isFirst ? 'lightgray' : 'black'}
                 className={!isFirst ? styles.activeCardIcon : ''}
             />
-            <Rating
+            {/* <Rating
                 emptySymbol={
                     <FontAwesomeIcon
                         icon={faStar}
@@ -34,7 +41,10 @@ const CardFooter = ({ onPressNext, onPressPrev, isFirst, isLast }) => {
                 }
                 onChange={setDifficultyRating}
                 initialRating={difficultyRating}
-            />
+            /> */}
+            <Button color='primary' onClick={onPressBegin}>
+                Begin Session
+            </Button>
             <FontAwesomeIcon
                 icon={faArrowAltCircleRight}
                 size='3x'

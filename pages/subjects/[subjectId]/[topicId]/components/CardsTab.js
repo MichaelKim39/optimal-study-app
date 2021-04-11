@@ -10,12 +10,16 @@ import { log } from '@/utils/logger';
 
 import FlashCard from './FlashCard';
 import CardFooter from './CardFooter';
+import CardModal from './CardModal';
 import AddButton from '@/components/global/AddButton';
 
 const CardsTab = ({ cards: initialCards }) => {
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [cards, setCards] = useState(initialCards);
     const [handleDeleteCard, deleteCardStatus] = useDeleteCard();
+    const [cardModalVis, setCardModalVis] = useState(false);
+
+    const toggleCardModal = () => setCardModalVis(!cardModalVis);
 
     const router = useRouter();
     const { subjectId, topicId } = router.query;
@@ -78,6 +82,7 @@ const CardsTab = ({ cards: initialCards }) => {
                             onDeletePress={handleDeletePress}
                         />
                         <CardFooter
+                            onPressBegin={toggleCardModal}
                             onPressPrev={handlePressPrev}
                             onPressNext={handlePressNext}
                             isFirst={isFirst}
@@ -86,6 +91,11 @@ const CardsTab = ({ cards: initialCards }) => {
                     </>
                 )}
             </div>
+            <CardModal
+                cards={cards}
+                visible={cardModalVis}
+                toggle={toggleCardModal}
+            />
         </TabPane>
     );
 };

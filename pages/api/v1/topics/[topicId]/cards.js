@@ -39,7 +39,7 @@ const handleEditCard = async (req, res) => {
         );
         return res.json(response.data);
     } catch (error) {
-        log('ERROR WHILE ADDING TOPIC CARD: ', error.response.data);
+        log('ERROR WHILE EDITING TOPIC CARD: ', error.response.data);
         return res.status(error.status || 422).json(error.response.data);
     }
 };
