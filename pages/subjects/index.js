@@ -68,8 +68,9 @@ const Subjects = ({ userInfo, userLoading, subjects: initialSubjects }) => {
                             <SubjectContainer
                                 subject={subject}
                                 showUtilButtons={
-                                    userInfo &&
-                                    checkPermission(userInfo, 'admin')
+                                    userInfo
+                                    // &&
+                                    // checkPermission(userInfo, 'admin')
                                 }
                                 onPressEdit={(event) =>
                                     handlePressEdit(event, subject._id)

@@ -20,10 +20,18 @@
     align-items: center;
     position: relative;
 }
+.blueShadow {
+    border-radius: 30px;
+    margin: 5px;
+    width: 230px;
+    // box-shadow: 10px 10px 20px #428bc0, -10px -10px 20px #79bef0;
+    -webkit-box-shadow: 5px 5px 15px 5px#79bef0;
+    box-shadow: 5px 5px 15px 5px#428bc0;
+}
 .scienceImage {
     border-radius: 30px;
-    width: 250px;
-    height: 250px;
+    max-width: 100%;
+    height: 230px;
 }
 .welcomeContainer {
     text-align: center;
@@ -37,10 +45,4 @@
     font-size: 30px;
     color: white;
     align-self: center;
-}
-.blueShadow {
-    border-radius: 30px;
-    // box-shadow: 10px 10px 20px #428bc0, -10px -10px 20px #79bef0;
-    -webkit-box-shadow: 5px 5px 15px 5px#79bef0;
-    box-shadow: 5px 5px 15px 5px#428bc0;
 }

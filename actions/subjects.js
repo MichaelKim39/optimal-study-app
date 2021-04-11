@@ -6,7 +6,7 @@ import { log } from '@/utils/logger';
 import { useReqStatus, handleFetchData } from '@/actions';
 
 // ADD SUBJECT
-export const addSubject = (subject) => {
+export const addSubject = async (subject) => {
     return axios.post(`/api/v1/subjects`, subject);
 };
 export const useAddSubject = () => {

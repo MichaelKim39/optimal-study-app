@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     CustomInput,
     Button,
@@ -16,9 +16,20 @@ import styles from '../Subjects.module.scss';
 import { log } from '@/utils/logger';
 
 const AddSubjectsForm = ({ onSubmitSubject, prefillData }) => {
-    const { register, handleSubmit, errors, reset } = useForm({
+    const {
+        register,
+        handleSubmit,
+        getValues,
+        setValue,
+        errors,
+        reset,
+    } = useForm({
         defaultValues: prefillData,
     });
+
+    useEffect(() => {
+        register({ name: 'image' });
+    }, [register]);
 
     return (
         <Form
@@ -51,18 +62,23 @@ const AddSubjectsForm = ({ onSubmitSubject, prefillData }) => {
                     className={styles.addSubjectsFormInput}
                 />
             </FormGroup>
-            <FormGroup className={styles.addSubjectsFormGroup}>
+            {/* <FormGroup className={styles.addSubjectsFormGroup}>
                 <Label for='image' className={styles.subjectInput}>
                     Image
                 </Label>
                 <CustomInput
+                    innerRef={register}
                     className={styles.addSubjectsFormInput}
                     type='file'
                     id='image'
                     name='image'
                     label='Browse PC for an image to represent this subject!'
+                    // onChange={(event) => {
+                    //     setValue('image', event.target.files.item(0));
+                    //     log('Change!', event.target.files.item(0));
+                    // }}
                 />
-            </FormGroup>
+            </FormGroup> */}
             <Button type='submit'>Submit</Button>
         </Form>
     );
