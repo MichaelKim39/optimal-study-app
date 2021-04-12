@@ -5,7 +5,7 @@ import { TabContent, TabPane } from 'reactstrap';
 import styles from './Topic.module.scss';
 
 import { log } from '@/utils/logger';
-import TopicsAPI from '@/libs/api/TopicsAPI';
+import TopicsAPI from '@/libs/api/topicsAPI';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';

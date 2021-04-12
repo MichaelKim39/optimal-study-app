@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { log } from '@/utils/logger';
 import { openSuccessToast } from '@/utils/popups';
-import SubjectsAPI from '../../../libs/api/subjectsAPI';
-// import SubjectsAPI from '@/libs/api/SubjectsAPI';
+import SubjectsAPI from '@/libs/api/subjectsAPI';
 import { checkPermission } from '@/actions/user';
 import { useDeleteTopic } from '@/actions/topics';
 
