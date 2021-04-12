@@ -1,6 +1,7 @@
 import auth0 from '@/utils/auth0';
 
-import SubjectsAPI from '@/libs/api/subjectsAPI';
+import SubjectsAPI from '../../../../libs/api/subjectsAPI';
+// import SubjectsAPI from '@/libs/api/subjectsAPI';
 import { log } from '@/utils/logger';
 
 const handleGetSubject = async (req, res) => {
