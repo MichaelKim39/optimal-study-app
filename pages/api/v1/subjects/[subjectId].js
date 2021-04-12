@@ -4,6 +4,8 @@ import SubjectsAPI from '../../../../libs/api/subjectsAPI';
 // import SubjectsAPI from '@/libs/api/subjectsAPI';
 import { log } from '@/utils/logger';
 
+// Comment to test deployment
+
 const handleGetSubject = async (req, res) => {
     try {
         const response = await new SubjectsAPI().getSubject(
