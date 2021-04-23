@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { useGetMe } from '@/actions/user';
 import { getMotivationalQuote } from '@/actions/quotes';
@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
 library.add(faPlusCircle);
+library.add(faInfoCircle);
 
 const App = ({ Component, pageProps }) => {
     const [myInfo, myInfoError, myInfoLoading] = useGetMe();

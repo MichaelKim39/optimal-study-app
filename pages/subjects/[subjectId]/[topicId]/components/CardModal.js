@@ -69,13 +69,13 @@ const CardModal = ({ cards, visible, toggle }) => {
             <ModalFooter>
                 <Button
                     color='primary'
-                    onClick={() => handleUpdateBucket(false)}
+                    onClick={() => handleUpdateBucket(true)}
                 >
                     Correct
                 </Button>
                 <Button
                     color='warning'
-                    onClick={() => handleUpdateBucket(true)}
+                    onClick={() => handleUpdateBucket(false)}
                 >
                     Incorrect
                 </Button>

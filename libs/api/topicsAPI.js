@@ -80,6 +80,21 @@ class TopicsAPI {
             this.config,
         );
     }
+
+    updateNextReview(subjectId, topicId) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/review`,
+            this.config,
+        );
+    }
+
+    toggleTopicActive(subjectId, topicId, setActive) {
+        return axios.patch(
+            `${this.subjectsApiUrl}/${subjectId}/${topicId}/active`,
+            { setActive },
+            this.config,
+        );
+    }
 }
 
 export default TopicsAPI;

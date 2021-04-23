@@ -2,6 +2,14 @@
 .root {
     padding-bottom: 50px;
 }
+.topicButtonsContainer {
+    display: flex;
+    flex-direction: row;
+}
+.topicButton {
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
 .topRowContainer {
     display: flex;
 }

@@ -90,3 +90,24 @@ export const deleteCard = (subjectId, topicId, cardId) => {
 export const useDeleteCard = () => {
     return useReqStatus(deleteCard);
 };
+
+// UPDATE NEXT REVIEW
+export const updateNextReview = (subjectId, topicId) => {
+    return axios.patch(`/api/v1/topics/${topicId}/review`, {
+        subjectId,
+    });
+};
+export const useUpdateNextReview = () => {
+    return useReqStatus(updateNextReview);
+};
+
+// UPDATE NEXT REVIEW
+export const toggleTopicActive = (subjectId, topicId, setActive) => {
+    return axios.patch(`/api/v1/topics/${topicId}/active`, {
+        subjectId,
+        setActive,
+    });
+};
+export const useToggleTopicActive = () => {
+    return useReqStatus(toggleTopicActive);
+};

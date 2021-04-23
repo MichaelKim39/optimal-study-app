@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Card,
     CardImg,
@@ -7,13 +7,13 @@ import {
     CardTitle,
     CardHeader,
     Button,
-    Row,
-    Col,
 } from 'reactstrap';
 
 import styles from '../Subject.module.scss';
 
 import { log } from '@/utils/logger';
+
+import ToolTipIcon from './ToolTipIcon';
 
 const TopicContainer = ({ topic, showDeleteButton = false, onPressDelete }) => {
     const DeleteButton = () => {
@@ -28,10 +28,28 @@ const TopicContainer = ({ topic, showDeleteButton = false, onPressDelete }) => {
         );
     };
 
+    const checkShouldReview = () => {
+        // The next required review date is today or has passed already
+        const today = Date.now();
+        const nextReview = Date.parse(topic.nextReview);
+        const pendingReview = nextReview <= today;
+        if (topic.active && pendingReview) {
+            return true;
+        }
+        return false;
+    };
+    const shouldReview = checkShouldReview();
+
     return (
         <Card className={styles.topicContainer}>
             <CardHeader>
                 <div className={styles.topicHeader}>
+                    {shouldReview && (
+                        <ToolTipIcon
+                            label={`${topic.title} has a review pending!`}
+                            id={topic.title.replace(/ /g, '')}
+                        />
+                    )}
                     <CardTitle className={styles.topicTitle}>
                         {topic.title}
                     </CardTitle>
