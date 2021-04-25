@@ -13,6 +13,14 @@ export const useAddSubject = () => {
     return useReqStatus(addSubject);
 };
 
+// SAVE SUBJECT
+export const saveSubjectCopy = async (subject) => {
+    return axios.post(`/api/v1/subjects/save`, subject);
+};
+export const useSaveSubjectCopy = () => {
+    return useReqStatus(saveSubjectCopy);
+};
+
 // EDIT SUBJECT
 export const editSubject = (subjectId, newSubject) => {
     return axios.patch(`/api/v1/subjects/${subjectId}`, newSubject);

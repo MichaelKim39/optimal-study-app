@@ -26,6 +26,10 @@ class SubjectsAPI {
         return axios.post(`${this.subjectsApiUrl}`, subject, this.config);
     }
 
+    saveSubjectCopy(subjectCopy) {
+        return axios.post(`${this.subjectsApiUrl}/save`, subjectCopy, this.config);
+    }
+
     editSubject(subjectId, newSubject) {
         return axios.patch(
             `${this.subjectsApiUrl}/${subjectId}`,

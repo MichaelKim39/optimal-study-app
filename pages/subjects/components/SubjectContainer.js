@@ -31,7 +31,7 @@ const SubjectContainer = ({
         if (clickEnabled) {
             router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
         } else {
-            onClickSubject();
+            onClickSubject(subject);
         }
     };
 
@@ -49,6 +49,7 @@ const SubjectContainer = ({
         <Card
             className={`${styles.subjectContainer} ${containerStyle}`}
             onClick={() => handleOpenSubject(subject._id)}
+            key={subject._id}
         >
             <CardHeader>
                 <Row className={styles.headerRow}>

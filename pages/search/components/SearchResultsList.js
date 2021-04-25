@@ -4,19 +4,21 @@ import { openSuccessToast, openErrorToast } from '@/utils/popups';
 import styles from '../Search.module.scss';
 
 import { log } from '@/utils/logger';
-import { useAddSubject } from '@/actions/subjects';
+import { useSaveSubjectCopy } from '@/actions/subjects';
 
 import SubjectContainer from '@/pages/subjects/components/SubjectContainer';
 
 const SearchResultsList = ({ results }) => {
-    const [handleAddSubject, subjectAddStatus] = useAddSubject();
+    const [handleSaveSubject, subjectSaveStatus] = useSaveSubjectCopy();
 
-    const handleSaveSubject = (subject) => {
+    const handleSaveSubjectCopy = (subject) => {
         if (confirm('Would you like to save a copy of this subject?')) {
             try {
-                openSuccessToast('Successfully Saved Copy of Subject');
+                handleSaveSubject(subject)
+                openSuccessToast('Successfully Saved Copy of Subject (Go to subjects page to view)');
             } catch (error) {
                 openErrorToast('Error saving copy of subject');
+                log("Error while saving subject: ", error)
             }
         }
     };
@@ -28,7 +30,7 @@ const SearchResultsList = ({ results }) => {
                     subject={subject}
                     showUtilButtons={false}
                     containerStyle={styles.searchResult}
-                    onClickSubject={(subject) => handleSaveSubject(subject)}
+                    onClickSubject={(subject) => handleSaveSubjectCopy(subject)}
                     clickEnabled={false}
                 />
             ))}
