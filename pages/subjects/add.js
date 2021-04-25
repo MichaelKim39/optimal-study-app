@@ -42,6 +42,4 @@ const AddSubjectPage = ({ userInfo, userLoading }) => {
     );
 };
 
-// TODO: Figure out why withAuthCheck redirects to home always - because guest not admin!!!
-// export default withAuthCheck(AddSubjectPage, 'guest');
 export default AddSubjectPage;

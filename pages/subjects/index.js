@@ -106,5 +106,4 @@ export const getServerSideProps = async ({ req, res }) => {
     };
 };
 
-// TODO: Figure out why withAuthCheck is failing here
 export default Subjects;

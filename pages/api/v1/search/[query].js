@@ -16,6 +16,5 @@ const handleSearchSubjects = async (req, res) => {
 };
 
 export default async function handleSearchRequest(req, res) {
-    //TODO: Implement search for topics too
     handleSearchSubjects(req, res);
 }
