@@ -23,10 +23,16 @@ const SubjectContainer = ({
     onPressDelete,
     showUtilButtons = false,
     containerStyle,
+    clickEnabled = true,
+    onClickSubject,
 }) => {
     const router = useRouter();
     const handleOpenSubject = (subjectId) => {
-        router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
+        if (clickEnabled) {
+            router.push('/subjects/[subjectId]', `/subjects/${subjectId}`);
+        } else {
+            onClickSubject();
+        }
     };
 
     const TopicsList = () => {

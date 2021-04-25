@@ -25,13 +25,14 @@ export const useReqStatus = (
     defaultErrorMessage = 'Error During API Request',
 ) => {
     const INIT_STATUS = {
-        loading: true,
+        loading: false,
         data: null,
         error: null,
     };
     const [reqStatus, setReqStatus] = useState(INIT_STATUS);
     const handleRequest = async (...inputData) => {
         setReqStatus(INIT_STATUS);
+        reqStatus.loading = true;
         try {
             const response = await apiRequest(...inputData);
             setReqStatus({

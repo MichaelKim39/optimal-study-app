@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputGroup, Input, Label, Button } from 'reactstrap';
+import { InputGroup, Input, Alert, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,15 +10,21 @@ import { useSearchSubjects } from '@/actions/subjects';
 
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import PageLayout from '@/components/layouts/PageLayout';
+import LoadingIndicator from '@/components/global/LoadingIndicator';
 import SearchResultsList from './components/SearchResultsList';
 
 const Search = ({ userInfo, userLoading }) => {
     const [query, setQuery] = useState('');
+    const [searchMade, setSearchMade] = useState(false);
     const [handleSearchSubjects, searchSubjectStatus] = useSearchSubjects();
-    const { data: searchResults, error: searchError } = searchSubjectStatus;
+    const {
+        loading: searchResultsLoading,
+        data: searchResults,
+    } = searchSubjectStatus;
 
     const handleSearch = () => {
         // log('SEARCHING FOR: ', query);
+        setSearchMade(true);
         handleSearchSubjects(query);
     };
 
@@ -43,7 +49,18 @@ const Search = ({ userInfo, userLoading }) => {
                         <FontAwesomeIcon icon={faSearch} size='lg' />
                     </Button>
                 </InputGroup>
+                {searchResultsLoading && <LoadingIndicator className='mt-3' />}
                 {searchResults && <SearchResultsList results={searchResults} />}
+                <Alert
+                    color='danger'
+                    isOpen={
+                        searchMade &&
+                        (!searchResults || searchResults.length === 0)
+                    }
+                    className='mt-3'
+                >
+                    No Results Found!
+                </Alert>
             </PageLayout>
         </DefaultLayout>
     );
