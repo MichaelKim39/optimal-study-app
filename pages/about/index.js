@@ -56,6 +56,6 @@ const getExtraProps = async () => {
     return aboutText;
 };
 
-export const getServerSideProps = withAuthSSR(getExtraProps, 'admin');
+export const getServerSideProps = withAuthSSR(getExtraProps, 'guest');
 
 export default About;

@@ -95,7 +95,7 @@ export const getServerSideProps = async ({ req, res }) => {
             Location: '/api/v1/signin',
         });
         res.end();
-        return;
+        return { props: { message: "Invalid session, redirecting with auth0"} }
     }
 
     const { accessToken: jwt } = session;

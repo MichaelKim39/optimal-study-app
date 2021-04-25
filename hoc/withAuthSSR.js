@@ -14,7 +14,7 @@ const withAuthSSR = (getExtraProps, role = 'guest') => {
                 Location: '/api/v1/signin',
             });
             res.end();
-            return;
+            return { props: { message: "Invalid session, redirecting with auth0"} }
         }
 
         const extraProps = hasPermission
