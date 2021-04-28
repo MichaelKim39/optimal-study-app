@@ -1,40 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Information
+Learn 2 Learn is a study-help application based on research-backed, optimal study practices.
+This is the front-end project for Learn 2 Learn. 
+This project uses [Next.js](https://nextjs.org/) and is bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+
+## Running the Application
+First, clone the git repository into your local environment.
+Proceed to run the development server with the following package.JSON script (You will need to install a package manager, either Yarn or NPM):
 
 ```bash
-npm run dev
+npm run start:dev
 # or
-yarn dev
+yarn run start:dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Learn More
+## Accessing the Application
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the live application.
 
-To learn more about Next.js, take a look at the following resources:
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Deployed on Vercel
+This Next.js app is deployed using [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), a deployment framework and service created by the creators of Next.js.
+Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Optimal Study Help App
 
 ## Import Organisation
-
 Imports are organised in the following order:
-
 -   Library imports
 -   Custom functionality
 -   Styles & design
